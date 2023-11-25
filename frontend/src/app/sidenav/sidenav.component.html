@@ -1,0 +1,62 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #sidenav
+    [opened]="isOpen"
+    class="sidenav"
+    mode="side"
+    opened
+    position="start"
+  >
+    <!-- Informations Utilisateur -->
+    <div *ngIf="user$ | async as user" class="user-info">
+      <mat-icon>account_circle</mat-icon>
+      <div>
+        <span>{{ user.email }}</span>
+      </div>
+    </div>
+
+    <!-- Séparateur -->
+    <mat-divider></mat-divider>
+
+    <!-- Liens de Navigation -->
+    <mat-nav-list *ngIf="user$ | async as user">
+      <!-- Liens communs à tous les utilisateurs -->
+      <a mat-list-item routerLink="/assignments">
+        <mat-icon>list</mat-icon>
+        Liste des devoirs
+      </a>
+
+      <!-- Liens spécifiques pour les professeurs -->
+      <ng-container *ngIf="user.role === 'professor'">
+        <a mat-list-item routerLink="/assignments/add">
+          <mat-icon>add</mat-icon>
+          Ajouter un devoir
+        </a>
+        <a mat-list-item routerLink="/users">
+          <mat-icon>people</mat-icon>
+          Gérer les utilisateurs
+        </a>
+        <a mat-list-item routerLink="/data-generator">
+          <mat-icon>build</mat-icon>
+          Données de test (Dev)
+        </a>
+      </ng-container>
+
+      <!-- Liens spécifiques pour les étudiants -->
+      <ng-container *ngIf="user.role === 'student'">
+        <a mat-list-item routerLink="/grades">
+          <mat-icon>grade</mat-icon>
+          Mes notes
+        </a>
+        <a mat-list-item routerLink="/resources">
+          <mat-icon>library_books</mat-icon>
+          Ressources
+        </a>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>Assignment</h2>
+<mat-dialog-content>
+  <ng-container *ngIf="!isEditMode">
+    <p>{{ data.title }}</p>
+    <p>{{ data.description }}</p>
+    <p>{{ data.dueDate | date : "dd/MM/yyyy" }}</p>
+
+    <mat-divider></mat-divider>
+  </ng-container>
+
+  <ng-container *ngIf="isEditMode">
+    <form>
+      <mat-form-field>
+        <mat-label>Titre</mat-label>
+        <input [(ngModel)]="tempAssignment.title" matInput name="title"/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input
+          [(ngModel)]="tempAssignment.description"
+          matInput
+          name="description"
+        />
+      </mat-form-field>
+    </form>
+    <mat-divider></mat-divider>
+  </ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+    (click)="toggleEditMode()"
+    *ngIf="isProfessor && !isEditMode"
+    mat-button
+  >
+    Modifier
+  </button>
+  <button (click)="saveChanges()" *ngIf="isProfessor && isEditMode" mat-button>
+    Sauvegarder
+  </button>
+  <button
+    (click)="toggleEditMode()"
+    *ngIf="isProfessor && isEditMode"
+    mat-button
+  >
+    Annuler
+  </button>
+  <button
+    (click)="deleteAssignment()"
+    *ngIf="isProfessor && isEditMode"
+    mat-button
+  >
+    Supprimer
+  </button>
+  <button mat-button mat-dialog-close>Fermer</button>
+</mat-dialog-actions>

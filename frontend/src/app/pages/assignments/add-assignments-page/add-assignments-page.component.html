@@ -1,0 +1,197 @@
+<div class="page-container">
+  <div *ngIf="isLoading" class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <mat-card class="stepper-container">
+    <mat-card-title>Ajouter un devoir</mat-card-title>
+
+    <mat-card-content>
+      <mat-horizontal-stepper #stepper [linear]="true">
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel
+            >Étape 1: Informations de Base
+            </ng-template
+            >
+
+            <div class="fields-container">
+              <div class="form-field-container">
+                <mat-form-field>
+                  <mat-label>Titre</mat-label>
+                  <input formControlName="title" matInput required/>
+                </mat-form-field>
+              </div>
+
+              <div class="form-field-container">
+                <mat-form-field>
+                  <mat-label>Description</mat-label>
+                  <textarea
+                    formControlName="description"
+                    matInput
+                    required
+                  ></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="button-navigation">
+              <button mat-button matStepperNext>Continuer</button>
+            </div>
+          </form>
+        </mat-step>
+        <!-- Étape 2: Informations Complémentaires -->
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel
+            >Étape 2: Informations Complémentaires
+            </ng-template
+            >
+
+            <div class="step-two-container">
+              <div class="calendar-container">
+                <mat-form-field class="form-field-calendar">
+                  <mat-label>Date Limite</mat-label>
+                  <input
+                    [matDatepicker]="picker"
+                    formControlName="dueDate"
+                    matInput
+                    required
+                  />
+
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-card class="inline-calendar-card">
+                    <mat-calendar
+                      (selectedChange)="onDateChange($event)"
+                      [(selected)]="selectedDate"
+                    ></mat-calendar>
+                  </mat-card>
+                </mat-form-field>
+              </div>
+
+              <div class="form-fields-container">
+                <!-- Subject -->
+                <mat-form-field>
+                  <mat-label>Matière</mat-label>
+                  <mat-select formControlName="subject" required>
+                    <mat-option
+                      *ngFor="let subject of subjects"
+                      [value]="subject"
+                    >
+                      {{ subject.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <!-- Professor -->
+                <mat-form-field>
+                  <mat-label>Professeur</mat-label>
+                  <mat-select formControlName="professor" required>
+                    <mat-option
+                      *ngFor="let professor of professors"
+                      [value]="professor"
+                    >
+                      {{ professor.firstName }} {{ professor.lastName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <!-- Group -->
+                <mat-form-field>
+                  <mat-label>Groupe</mat-label>
+                  <mat-select formControlName="group" required>
+                    <mat-option *ngFor="let group of allGroups" [value]="group">
+                      {{ group.name }} - {{ group.promotion.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="button-navigation">
+              <button mat-button matStepperPrevious>Retour</button>
+              <button mat-button matStepperNext>Continuer</button>
+            </div>
+          </form>
+        </mat-step>
+        <!-- Étape 3: Pièces jointes -->
+        <mat-step [stepControl]="thirdFormGroup">
+          <form [formGroup]="thirdFormGroup">
+            <ng-template matStepLabel>Étape 3: Pièces jointes</ng-template>
+
+            <!-- Type de pièce jointe -->
+            <mat-form-field>
+              <mat-label>Type de pièce jointe</mat-label>
+              <mat-select formControlName="attachmentType">
+                <mat-option value="link">Lien Web</mat-option>
+                <mat-option value="file">Fichier</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- Valeur de la pièce jointe -->
+            <mat-form-field
+              *ngIf="thirdFormGroup.value.attachmentType === 'link'"
+            >
+              <mat-label>Lien Web</mat-label>
+              <input formControlName="attachmentValue" matInput/>
+            </mat-form-field>
+            <mat-form-field
+              *ngIf="thirdFormGroup.value.attachmentType === 'file'"
+            >
+              <mat-label>Fichier</mat-label>
+              <input (change)="onFileSelected($event)" matInput type="file"/>
+            </mat-form-field>
+
+            <!-- Bouton pour ajouter la pièce jointe -->
+            <button (click)="addAttachment()" color="primary" mat-raised-button>
+              Ajouter
+            </button>
+
+            <!-- Liste des pièces jointes -->
+            <div *ngFor="let attachment of attachments">
+              {{ attachment.type }}: {{ attachment.value }}
+            </div>
+
+            <div class="button-navigation">
+              <button mat-button matStepperPrevious>Retour</button>
+              <button mat-button matStepperNext>Continuer</button>
+            </div>
+          </form>
+        </mat-step>
+        <!-- Étape 4: Résumé -->
+        <mat-step>
+          <ng-template matStepLabel>Résumé</ng-template>
+
+          <mat-card class="summary-card">
+            <mat-card-title>Résumé de votre devoir</mat-card-title>
+            <mat-card-content>
+              <mat-list>
+                <mat-list-item>
+                  <h4 matLine>Titre</h4>
+                  <p class="mat-body-1" matLine>
+                    {{ firstFormGroup.value.title }}
+                  </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <h4 matLine>Description</h4>
+                  <p class="mat-body-1" matLine>
+                    {{ firstFormGroup.value.description }}
+                  </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <h4 matLine>Date Limite</h4>
+                  <p class="mat-body-1" matLine>
+                    {{ secondFormGroup.value.dueDate | date : "dd/MM/yyyy" }}
+                  </p>
+                </mat-list-item>
+              </mat-list>
+            </mat-card-content>
+          </mat-card>
+
+          <div class="button-navigation">
+            <button mat-button matStepperPrevious>Retour</button>
+            <button (click)="submit()" mat-button>Terminer</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </mat-card-content>
+  </mat-card>
+</div>

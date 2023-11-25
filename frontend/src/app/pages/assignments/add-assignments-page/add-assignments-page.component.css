@@ -1,0 +1,94 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  margin: 0;
+}
+
+.stepper-container {
+  height: 700px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.fields-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.form-field-container {
+  margin-bottom: 20px;
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+::ng-deep .mat-form-field {
+  width: 100%;
+}
+
+textarea.mat-input-element {
+  height: 100px !important;
+  resize: none;
+  overflow-wrap: break-word;
+  overflow-x: auto;
+  box-sizing: border-box;
+  padding: 8px 0 7px;
+  white-space: pre-wrap;
+}
+
+.inline-calendar-card {
+  width: 90% !important;
+}
+
+.step-two-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-container {
+  flex: 1;
+}
+
+.form-fields-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+.inline-calendar-card {
+  width: 100%;
+}
+
+::ng-deep .mat-form-field {
+  width: 100%;
+}
+
+.button-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.summary-card {
+  width: 100%;
+}
+
+.button-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

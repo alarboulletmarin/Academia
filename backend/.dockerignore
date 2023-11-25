@@ -1,0 +1,36 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional gitignore file
+.gitignore
+
+# Optional markdown files
+*.md
+
+# Optional editor configuration files
+.editorconfig
+
+# Optional files related to the IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Optional dotenv environment variables file
+.env
+.env.test
+
+# Optional test directory
+/test

@@ -1,0 +1,36 @@
+<div class="auth-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Connexion</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (submit)="onSubmit()" [formGroup]="loginForm">
+
+        <!-- email -->
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input formControlName="email" matInput type="email"/>
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+        <!-- password -->
+        <mat-form-field appearance="fill">
+          <mat-label>Mot de passe</mat-label>
+          <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" matInput/>
+          <button (click)="togglePasswordVisibility()" mat-icon-button matSuffix type="button">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <!-- error message -->
+        <div *ngIf="message" class="error-message">{{ message }}</div>
+
+        <!-- submit -->
+        <button color="primary" mat-raised-button type="submit">
+          Se connecter
+        </button>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

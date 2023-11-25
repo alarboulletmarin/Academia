@@ -1,0 +1,16 @@
+mat-grid-tile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+mat-icon {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+mat-dialog-content {
+  overflow: hidden;
+}
+
+
