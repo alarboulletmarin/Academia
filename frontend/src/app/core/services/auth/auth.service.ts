@@ -1,11 +1,11 @@
 // === Import : NPM
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {BehaviorSubject, catchError, Observable, throwError} from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 
 // === Import : LOCAL
-import {APP_CONSTANTS} from '../../../app.constant';
+import { APP_CONSTANTS } from '../../../app.constant';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class AuthService {
    */
   private currentTokenSubject: BehaviorSubject<string | null> =
     new BehaviorSubject<string | null>(
-      JSON.parse(localStorage.getItem(this.JWT_TOKEN) || '""')
+      JSON.parse(localStorage.getItem(this.JWT_TOKEN) || '""'),
     );
   /**
    * Observable that emits the current authentication token or null if not authenticated.
@@ -31,8 +31,10 @@ export class AuthService {
   public currentToken: Observable<string | null> =
     this.currentTokenSubject.asObservable();
 
-  constructor(private httpClient: HttpClient, private router: Router) {
-  }
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+  ) {}
 
   /**
    * Returns the current token value from the currentTokenSubject.
@@ -57,6 +59,24 @@ export class AuthService {
    */
   public getJwtToken(): string | null {
     return this.currentTokenSubject.getValue();
+  }
+
+  public tokenCheck() {
+    setInterval(
+      () => {
+        const token = this.getJwtToken();
+        if (token) {
+          this.removeJwtToken();
+          this.redirectToLogin();
+        }
+      },
+      5 * 60 * 1000,
+    ); // 5 minutes
+  }
+
+  public removeJwtToken() {
+    localStorage.removeItem(this.JWT_TOKEN);
+    this.currentTokenSubject.next(null);
   }
 
   /**
@@ -84,7 +104,9 @@ export class AuthService {
   public logout() {
     localStorage.removeItem(this.JWT_TOKEN);
     this.currentTokenSubject.next(null);
-    this.router.navigate([APP_CONSTANTS.routerLinks.auth]);
+    this.router
+      .navigate([APP_CONSTANTS.routerLinks.auth])
+      .then((r) => console.log(r));
   }
 
   /**
@@ -104,39 +126,27 @@ export class AuthService {
   public getToken() {
     const token = this.getJwtToken();
     if (token) {
-      const decodedToken = JSON.parse(atob(token.split('.')[1]));
-      return decodedToken;
+      return JSON.parse(atob(token.split('.')[1]));
     }
     return;
   }
 
   public redirectToLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']).then((r) => console.log(r));
   }
 
   public redirectToHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/']).then((r) => console.log(r));
   }
 
   public autoLogin() {
     const token = this.getJwtToken();
     if (token) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/']).then((r) => console.log(r));
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']).then((r) => console.log(r));
     }
   }
-
-  /**
-   * Registers a new user.
-   * @param data The user registration data.
-   * @returns An observable of the HTTP response.
-   */
-  // public register(data: any): Observable<any> {
-  //   return this.httpClient
-  //     .post(`${this.endpoint}/register`, data)
-  //     .pipe(catchError(this.handleError));
-  // }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -145,7 +155,7 @@ export class AuthService {
     } else {
       // Le backend a renvoyé un code de réponse d'échec.
       console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`,
       );
     }
     // Retourne un observable avec un message d'erreur pour l'utilisateur.

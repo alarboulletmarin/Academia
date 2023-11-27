@@ -23,3 +23,5 @@ export function requireRole(role) {
         }
     };
 }
+
+export
