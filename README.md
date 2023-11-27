@@ -7,24 +7,12 @@ devoirs.
 
 - **Frontend** : Angular
 - **Backend** : Node.js
-- **Base de données** : MongoDB
 
 ## 🚀 Mise en route
 
 ### Pré-requis
 
 - ✅ Avoir [Node.js](https://nodejs.org/) et [npm](https://www.npmjs.com/) installés.
-- 🗄️ Avoir une instance de [MongoDB](https://www.mongodb.com/try/download/community) en cours d'exécution.
-
-### 🗃️ Initialisation de la base de données
-
-Avant de démarrer l'application, assurez-vous de créer une base de données nommée `db_assignment` dans MongoDB. Vous
-pouvez le faire à l'aide du shell MongoDB ou de n'importe quel outil de gestion MongoDB que vous préférez.
-
-```bash
-mongo
-use db_assignment
-```
 
 ### 🔧 Installation
 
@@ -74,7 +62,7 @@ use db_assignment
 1. À la racine du projet, exécutez la commande suivante pour construire les images Docker et démarrer les conteneurs :
 
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
    Cette commande va construire les images Docker pour le backend, le frontend et la base de données MongoDB, puis
