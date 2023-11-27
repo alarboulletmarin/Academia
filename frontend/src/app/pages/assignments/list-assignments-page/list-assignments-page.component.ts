@@ -1,15 +1,13 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {MatSort, Sort} from '@angular/material/sort';
-import {HttpParams} from '@angular/common/http';
-import {Assignment} from "../../../core/models/assignment.model";
-import {AssignmentService} from "../../../core/services/assignment/assignment.service";
-import {SubjectService} from "../../../core/services/subject/subject.service";
-import {ProfessorService} from "../../../core/services/professor/professor.service";
-import {
-  AssignmentDialogComponent
-} from "../../../shared/components/assignment/assignment-dialog/assignment-dialog.component";
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
+import { HttpParams } from '@angular/common/http';
+import { Assignment } from '../../../core/models/assignment.model';
+import { AssignmentService } from '../../../core/services/assignment/assignment.service';
+import { SubjectService } from '../../../core/services/subject/subject.service';
+import { ProfessorService } from '../../../core/services/professor/professor.service';
+import { AssignmentDialogComponent } from '../../../shared/components/assignment/assignment-dialog/assignment-dialog.component';
 
 @Component({
   selector: 'app-list-assignments-page',
@@ -45,9 +43,8 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
     private assignmentService: AssignmentService,
     private dialog: MatDialog,
     private subjectService: SubjectService,
-    private professorService: ProfessorService
-  ) {
-  }
+    private professorService: ProfessorService,
+  ) {}
 
   ngOnInit(): void {
     this.loadSubjects();
@@ -94,7 +91,7 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
       },
       (error) => {
         console.error('Error fetching assignments:', error);
-      }
+      },
     );
   }
 
@@ -145,7 +142,7 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
       },
       (error) => {
         console.error('Error fetching subjects:', error);
-      }
+      },
     );
   }
 
@@ -159,7 +156,7 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
       },
       (error) => {
         console.error('Error fetching professors:', error);
-      }
+      },
     );
   }
 }
