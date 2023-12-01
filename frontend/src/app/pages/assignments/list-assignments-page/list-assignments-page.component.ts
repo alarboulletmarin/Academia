@@ -75,7 +75,7 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
   }
 
   public loadAssignments(): void {
-    let params = new HttpParams()
+    const params = new HttpParams()
       .set('page', this.currentPage.toString())
       .set('limit', this.assignmentsPerPage.toString())
       .set('sortBy', this.currentSortField)
@@ -84,15 +84,13 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
       .set('subject', this.currentSubject)
       .set('professor', this.currentProfessor);
 
-    this.assignmentService.getAssignments(params).subscribe(
-      (data) => {
-        this.assignments = data.assignments;
-        this.totalAssignments = data.totalResults;
+    this.assignmentService.getAssignments(params).subscribe({
+      next: ({ assignments, totalResults }) => {
+        this.assignments = assignments;
+        this.totalAssignments = totalResults;
       },
-      (error) => {
-        console.error('Error fetching assignments:', error);
-      },
-    );
+      error: (error) => console.error('Error fetching assignments:', error),
+    });
   }
 
   public applyFilter(event: Event) {
@@ -115,14 +113,7 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
     this.loadAssignments();
   }
 
-  getProfessorValue(professor: any) {
-    return JSON.stringify({
-      firstName: professor.firstName,
-      lastName: professor.lastName,
-    });
-  }
-
-  openAssignmentDialog(assignment: Assignment) {
+  public openAssignmentDialog(assignment: Assignment): void {
     const dialogRef = this.dialog.open(AssignmentDialogComponent, {
       width: '500px',
       data: assignment,
@@ -136,27 +127,27 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
   }
 
   private loadSubjects(): void {
-    this.subjectService.getSubjects().subscribe(
-      (data) => {
+    this.subjectService.getSubjects().subscribe({
+      next: (data) => {
         this.subjects = data.map((subject) => subject.name);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching subjects:', error);
       },
-    );
+    });
   }
 
   private loadProfessors(): void {
-    this.professorService.getProfessors().subscribe(
-      (data) => {
+    this.professorService.getProfessors().subscribe({
+      next: (data) => {
         this.professors = data.map((professor) => ({
           firstName: professor.firstName,
           lastName: professor.lastName,
         }));
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching professors:', error);
       },
-    );
+    });
   }
 }

@@ -6,8 +6,7 @@ export const jwtTokenAuthentication = (req, res, next) => {
   if (!token) return res.status(404).send("404 Not found - No token provided.");
 
   try {
-    const decoded = jwt.verify(token, jwtConfig.secret);
-    req.user = decoded;
+    req.user = jwt.verify(token, jwtConfig.secret);
     next();
   } catch (ex) {
     res.status(400).send("Invalid token.");

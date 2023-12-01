@@ -1,16 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Subject} from "../../../core/models/subject.model";
-import {Professor} from "../../../core/models/professor.model";
-import {Promotion} from "../../../core/models/promotion.model";
-import {Group} from "../../../core/models/group.model";
-import {AssignmentAttachment} from "../../../core/models/attachment.model";
-import {ProfessorService} from "../../../core/services/professor/professor.service";
-import {SubjectService} from "../../../core/services/subject/subject.service";
-import {GroupService} from "../../../core/services/group/group.service";
-import {AssignmentService} from "../../../core/services/assignment/assignment.service";
-import {Assignment} from "../../../core/models/assignment.model";
-
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject } from '../../../core/models/subject.model';
+import { Professor } from '../../../core/models/professor.model';
+import { Promotion } from '../../../core/models/promotion.model';
+import { Group } from '../../../core/models/group.model';
+import { AssignmentAttachment } from '../../../core/models/attachment.model';
+import { ProfessorService } from '../../../core/services/professor/professor.service';
+import { SubjectService } from '../../../core/services/subject/subject.service';
+import { GroupService } from '../../../core/services/group/group.service';
+import { AssignmentService } from '../../../core/services/assignment/assignment.service';
+import { Assignment } from '../../../core/models/assignment.model';
 
 @Component({
   selector: 'app-add-assignments-page',
@@ -30,16 +29,15 @@ export class AddAssignmentsPageComponent implements OnInit {
   public promotions: Promotion[] = [];
   public allGroups: Group[] = [];
   public attachments: AssignmentAttachment[] = [];
-  public selectedDate: Date = new Date();
+  public selectedDate: Date | null = new Date();
 
   constructor(
     private _formBuilder: FormBuilder,
     private professorService: ProfessorService,
     private subjectService: SubjectService,
     private groupService: GroupService,
-    private assignmentService: AssignmentService
-  ) {
-  }
+    private assignmentService: AssignmentService,
+  ) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -50,7 +48,7 @@ export class AddAssignmentsPageComponent implements OnInit {
       dueDate: ['', Validators.required],
       subject: ['', Validators.required],
       professor: ['', Validators.required],
-      group: {value: '', disabled: true, validators: Validators.required},
+      group: { value: '', disabled: true, validators: Validators.required },
     });
 
     this.thirdFormGroup = this._formBuilder.group({
@@ -110,7 +108,7 @@ export class AddAssignmentsPageComponent implements OnInit {
     }
   }
 
-  onDateChange(newDate: Date) {
+  onDateChange(newDate: Date | null) {
     this.selectedDate = newDate;
     this.secondFormGroup.get('dueDate')!.setValue(newDate);
   }
@@ -129,7 +127,7 @@ export class AddAssignmentsPageComponent implements OnInit {
         value: this.thirdFormGroup.value.attachmentValue,
       };
       this.attachments.push(attachment);
-      this.thirdFormGroup.reset({attachmentType: 'link'});
+      this.thirdFormGroup.reset({ attachmentType: 'link' });
     }
   }
 }

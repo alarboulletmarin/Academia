@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from "../../../core/services/auth/auth.service";
-import {APP_CONSTANTS} from "../../../app.constant";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth/auth.service';
+import { APP_CONSTANTS } from '../../../app.constant';
 
 @Component({
   selector: 'app-auth-page',
@@ -13,8 +13,10 @@ export class AuthPageComponent implements OnInit {
   public message: string = '';
   public hidePassword = true;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
-  }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -29,15 +31,15 @@ export class AuthPageComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.authService.signin(this.loginForm.value).subscribe(
-        (response) => {
+      this.authService.signin(this.loginForm.value).subscribe({
+        next: (response) => {
           this.authService.setToken(response.token);
           window.location.href = APP_CONSTANTS.routerLinks.home;
         },
-        (error) => {
+        error: () => {
           this.message = 'Email ou mot de passe incorrect.';
-        }
-      );
+        },
+      });
     }
   }
 }
