@@ -1,6 +1,6 @@
 import express from "express";
-import {getUser, getUsers, loginUser} from "../controllers/userController.js";
-import {jwtTokenAuthentication} from "../config/security/jwtTokenAuthentication.js";
+import { getUser, getUsers, loginUser } from "../controllers/userController.js";
+import { jwtTokenAuthentication } from "../core/security/jwtTokenAuthentication.js";
 
 const router = express.Router();
 
