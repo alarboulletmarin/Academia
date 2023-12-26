@@ -56,7 +56,7 @@ const setupExpress = (app, port) => {
   app.use("/api/submissions", submissionRoutes);
   app.use(errorHandler);
   app.listen(port, () => {
-    console.log(`Server is running`);
+    console.log(`Server is running : http://localhost:${port}`);
   });
 };
 
