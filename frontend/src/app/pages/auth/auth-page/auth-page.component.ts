@@ -6,7 +6,7 @@ import { APP_CONSTANTS } from '../../../app.constant';
 @Component({
   selector: 'app-auth-page',
   templateUrl: './auth-page.component.html',
-  styleUrls: ['./auth-page.component.css'],
+  styleUrls: ['./auth-page.component.scss'],
 })
 export class AuthPageComponent implements OnInit {
   public loginForm!: FormGroup;

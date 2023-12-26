@@ -5,7 +5,7 @@ import { UserService } from '../../../core/services/user/user.service';
 @Component({
   selector: 'app-list-users-page',
   templateUrl: './list-users-page.component.html',
-  styleUrls: ['./list-users-page.component.css'],
+  styleUrls: ['./list-users-page.component.scss'],
 })
 export class ListUsersPageComponent implements OnInit {
   public users: User[] = [];

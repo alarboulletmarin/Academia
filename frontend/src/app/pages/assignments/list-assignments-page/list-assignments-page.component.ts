@@ -12,7 +12,7 @@ import { AssignmentDialogComponent } from '../../../shared/components/assignment
 @Component({
   selector: 'app-list-assignments-page',
   templateUrl: './list-assignments-page.component.html',
-  styleUrls: ['./list-assignments-page.component.css'],
+  styleUrls: ['./list-assignments-page.component.scss'],
 })
 export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

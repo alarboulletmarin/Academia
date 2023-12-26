@@ -14,7 +14,7 @@ import { Assignment } from '../../../core/models/assignment.model';
 @Component({
   selector: 'app-add-assignments-page',
   templateUrl: './add-assignments-page.component.html',
-  styleUrls: ['./add-assignments-page.component.css'],
+  styleUrls: ['./add-assignments-page.component.scss'],
 })
 export class AddAssignmentsPageComponent implements OnInit {
   // form groups

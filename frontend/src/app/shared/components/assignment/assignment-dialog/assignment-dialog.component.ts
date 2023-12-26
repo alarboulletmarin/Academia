@@ -9,7 +9,7 @@ import { AssignmentService } from '../../../../core/services/assignment/assignme
 @Component({
   selector: 'app-assignment-dialog',
   templateUrl: './assignment-dialog.component.html',
-  styleUrls: ['./assignment-dialog.component.css'],
+  styleUrls: ['./assignment-dialog.component.scss'],
 })
 export class AssignmentDialogComponent implements OnInit {
   public isProfessor: boolean = false;
