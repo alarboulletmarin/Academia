@@ -4,7 +4,7 @@ import { AssignmentService } from '../../../core/services/assignment/assignment.
 @Component({
   selector: 'app-generate-assignments-page',
   templateUrl: './generate-assignments-page.component.html',
-  styleUrl: './generate-assignments-page.component.css',
+  styleUrl: './generate-assignments-page.component.scss',
 })
 export class GenerateAssignmentsPageComponent {
   constructor(private assignmentService: AssignmentService) {}

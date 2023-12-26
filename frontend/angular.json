@@ -19,14 +19,18 @@
             "polyfills": [
               "zone.js"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            },
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -84,8 +88,7 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }

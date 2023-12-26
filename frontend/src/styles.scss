@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+
+@use '../node_modules/@angular/material' as mat;
+
+@include mat.core();
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// Define the color configuration for both themes
+$dark-color-config: (
+  primary: mat.define-palette(mat.$pink-palette),
+  accent: mat.define-palette(mat.$blue-grey-palette)
+);
+$light-color-config: (
+  primary: mat.define-palette(mat.$indigo-palette),
+  accent: mat.define-palette(mat.$pink-palette)
+);
+
+// Define the default theme
+$default-theme: mat.define-light-theme((
+  color: $light-color-config,
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// Define the dark theme
+$dark-theme: mat.define-dark-theme((
+  color: $dark-color-config,
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// Apply the themes globally
+body {
+  // Apply default theme
+  @include mat.all-component-themes($default-theme);
+}
+
+body.dark-theme {
+  // Apply only color configuration for the dark theme
+  @include mat.all-component-colors($dark-theme);
+}
