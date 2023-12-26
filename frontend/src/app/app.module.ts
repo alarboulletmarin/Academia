@@ -21,6 +21,7 @@ import { ListUsersPageComponent } from './pages/user/list-users-page/list-users-
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthInterceptor } from './core/http-interceptors/auth-interceptors';
+import { GenerateAssignmentsPageComponent } from './pages/assignments/generate-assignments-page/generate-assignments-page.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -35,6 +36,7 @@ const COMPONENTS = [
   ListUsersPageComponent,
   PagesNotFoundComponent,
   AssignmentDialogComponent,
+  GenerateAssignmentsPageComponent,
 ];
 
 @NgModule({

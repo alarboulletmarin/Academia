@@ -63,4 +63,18 @@ export class AssignmentService {
         }),
       );
   }
+
+  generateAssignments(num: number): Observable<any> {
+    return this.http
+      .post(
+        `${this.apiUrl}/generate`,
+        { numAssignments: num },
+        { headers: this.headers },
+      )
+      .pipe(
+        tap(() => {
+          this.assignmentsUpdatedSubject.next();
+        }),
+      );
+  }
 }

@@ -1,4 +1,4 @@
-import {environment} from "../environments/environment";
+import {environment} from '../environments/environment';
 
 /**
  * Constants used in the application.
@@ -15,6 +15,7 @@ export const APP_CONSTANTS = {
     home: '',
     addAssignment: 'assignments/add',
     listAssignments: 'assignments',
+    generateAssignments: 'assignments/generate',
     auth: 'login',
     users: 'users',
   },

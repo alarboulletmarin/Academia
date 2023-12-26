@@ -2,6 +2,7 @@ import express from "express";
 import {
   createAssignment,
   deleteAssignment,
+  generateAssignments,
   getAssignment,
   getAssignments,
   updateAssignment,
@@ -34,5 +35,6 @@ router.delete(
   requireRole("professor"),
   deleteAssignment,
 );
+router.post("/generate", generateAssignments);
 
 export default router;
