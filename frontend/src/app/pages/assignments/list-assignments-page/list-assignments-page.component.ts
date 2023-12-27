@@ -141,6 +141,7 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
     this.professorService.getProfessors().subscribe({
       next: (data) => {
         this.professors = data.map((professor) => ({
+          _id: professor._id,
           firstName: professor.firstName,
           lastName: professor.lastName,
         }));

@@ -76,9 +76,11 @@ export async function getAssignments(req, res) {
       sortBy = "dueDate",
       order = "asc",
       search = "",
+      paginate = "true",
     } = req.query;
 
     const skip = (page - 1) * limit;
+    const paginateCondition = paginate === "true";
 
     let sortOptions = {};
     sortOptions[sortBy] = order === "asc" ? 1 : -1;
@@ -98,16 +100,10 @@ export async function getAssignments(req, res) {
       }
     }
 
-    let professorParam = req.query.professor;
-    professorParam = professorParam ? professorParam.split(" ") : null;
+    let professorId = req.query.professor;
 
-    if (professorParam) {
-      let professorQuery = {
-        lastName: professorParam[1],
-        firstName: professorParam[0],
-      };
-
-      let professorDoc = await Professor.findOne(professorQuery);
+    if (professorId) {
+      let professorDoc = await Professor.findById(professorId);
       if (professorDoc) {
         filterOptions.professor = professorDoc._id;
       } else {
@@ -115,18 +111,43 @@ export async function getAssignments(req, res) {
       }
     }
 
-    const assignments = await Assignment.find(filterOptions)
+    let dueDate = req.query.dueDate;
+    if (dueDate) {
+      let dueDateObj = new Date(dueDate);
+      filterOptions.dueDate = {
+        $gte: new Date(dueDateObj.setHours(0, 0, 0, 0)),
+        $lt: new Date(dueDateObj.setHours(24, 0, 0, 0)),
+      };
+    }
+
+    let start = req.query.start;
+    let end = req.query.end;
+
+    if (start && end) {
+      let startDate = new Date(start).setHours(0, 0, 0, 0);
+      let endDate = new Date(end).setHours(23, 59, 59, 999);
+
+      filterOptions.dueDate = {
+        $gte: new Date(startDate),
+        $lt: new Date(endDate),
+      };
+    }
+
+    let assignmentsQuery = Assignment.find(filterOptions)
       .populate("subject")
       .populate("professor")
       .populate("group")
-      .sort(sortOptions)
-      .skip(skip)
-      .limit(limit);
+      .sort(sortOptions);
 
+    if (paginateCondition) {
+      assignmentsQuery.skip(skip).limit(limit);
+    }
+
+    const assignments = await assignmentsQuery;
     const total = await Assignment.countDocuments(filterOptions);
 
     res.json({
-      totalPages: Math.ceil(total / limit),
+      totalPages: paginateCondition ? Math.ceil(total / limit) : 1,
       totalResults: total,
       currentPage: page,
       assignments,

@@ -1,126 +1,126 @@
 <mat-card>
-    <mat-card-title>Liste des devoirs</mat-card-title>
-    <mat-card-content>
-        <!-- search box for filtering assignments -->
-        <mat-form-field>
-            <mat-label>Chercher</mat-label>
-            <input (keyup)="applyFilter($event)" matInput placeholder="Ex. Titre"/>
-        </mat-form-field>
+  <mat-card-title>Liste des devoirs</mat-card-title>
+  <mat-card-content>
+    <!-- search box for filtering assignments -->
+    <mat-form-field>
+      <mat-label>Chercher</mat-label>
+      <input (keyup)="applyFilter($event)" matInput placeholder="Ex. Titre"/>
+    </mat-form-field>
 
-        <!-- filter by subject -->
-        <mat-form-field>
-            <mat-label>Matière</mat-label>
-            <mat-select
-                    (selectionChange)="loadAssignments()"
-                    [(value)]="currentSubject"
-            >
-                <mat-option *ngFor="let subject of subjects" [value]="subject">
-                    {{ subject }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <button
-                (click)="resetSubjectFilter()"
-                *ngIf="currentSubject"
-                mat-icon-button
+    <!-- filter by subject -->
+    <mat-form-field>
+      <mat-label>Matière</mat-label>
+      <mat-select
+        (selectionChange)="loadAssignments()"
+        [(value)]="currentSubject"
+      >
+        <mat-option *ngFor="let subject of subjects" [value]="subject">
+          {{ subject }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button
+      (click)="resetSubjectFilter()"
+      *ngIf="currentSubject"
+      mat-icon-button
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+
+    <!-- filter by professor -->
+    <mat-form-field>
+      <mat-label>Professeur</mat-label>
+      <mat-select
+        (selectionChange)="loadAssignments()"
+        [(value)]="currentProfessor"
+      >
+        <mat-option
+          *ngFor="let professor of professors"
+          [value]="professor._id"
         >
-            <mat-icon>clear</mat-icon>
-        </button>
+          {{ professor.firstName }} {{ professor.lastName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button
+      (click)="resetProfessorFilter()"
+      *ngIf="currentProfessor"
+      mat-icon-button
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
 
-        <!-- filter by professor -->
-        <mat-form-field>
-            <mat-label>Professeur</mat-label>
-            <mat-select
-                    (selectionChange)="loadAssignments()"
-                    [(value)]="currentProfessor"
-            >
-                <mat-option
-                        *ngFor="let professor of professors"
-                        [value]="professor.firstName + ' ' + professor.lastName"
-                >
-                    {{ professor.firstName }} {{ professor.lastName }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <button
-                (click)="resetProfessorFilter()"
-                *ngIf="currentProfessor"
-                mat-icon-button
-        >
-            <mat-icon>clear</mat-icon>
-        </button>
+    <table
+      [dataSource]="assignments"
+      class="mat-elevation-z8"
+      mat-table
+      matSort
+    >
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header="title">Titre</th>
+        <td *matCellDef="let assignment" mat-cell>{{ assignment.title }}</td>
+      </ng-container>
 
-        <table
-                [dataSource]="assignments"
-                class="mat-elevation-z8"
-                mat-table
-                matSort
-        >
-            <!-- Title Column -->
-            <ng-container matColumnDef="title">
-                <th *matHeaderCellDef mat-header-cell mat-sort-header="title">Titre</th>
-                <td *matCellDef="let assignment" mat-cell>{{ assignment.title }}</td>
-            </ng-container>
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header="description">
+          Description
+        </th>
+        <td *matCellDef="let assignment" mat-cell>
+          {{ assignment.description }}
+        </td>
+      </ng-container>
 
-            <!-- Description Column -->
-            <ng-container matColumnDef="description">
-                <th *matHeaderCellDef mat-header-cell mat-sort-header="description">
-                    Description
-                </th>
-                <td *matCellDef="let assignment" mat-cell>
-                    {{ assignment.description }}
-                </td>
-            </ng-container>
+      <!-- Professor Column -->
+      <ng-container matColumnDef="professor">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header="professor">
+          Professeur
+        </th>
+        <td *matCellDef="let assignment" mat-cell>
+          {{ assignment.professor.firstName }}
+          {{ assignment.professor.lastName }}
+        </td>
+      </ng-container>
 
-            <!-- Professor Column -->
-            <ng-container matColumnDef="professor">
-                <th *matHeaderCellDef mat-header-cell mat-sort-header="professor">
-                    Professeur
-                </th>
-                <td *matCellDef="let assignment" mat-cell>
-                    {{ assignment.professor.firstName }}
-                    {{ assignment.professor.lastName }}
-                </td>
-            </ng-container>
+      <!-- Group Column -->
+      <ng-container matColumnDef="group">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header="group">
+          Groupe
+        </th>
 
-            <!-- Group Column -->
-            <ng-container matColumnDef="group">
-                <th *matHeaderCellDef mat-header-cell mat-sort-header="group">
-                    Groupe
-                </th>
-
-                <td *matCellDef="let assignment" mat-cell>
+        <td *matCellDef="let assignment" mat-cell>
                     <span *ngFor="let group of assignment.group?.name">
                       {{ group }}
                     </span>
-                </td>
-            </ng-container>
- 
-            <!-- Due Date Column -->
-            <ng-container matColumnDef="dueDate">
-                <th *matHeaderCellDef mat-header-cell mat-sort-header="dueDate">
-                    Date d'échéance
-                </th>
-                <td *matCellDef="let assignment" mat-cell>
-                    {{ assignment.dueDate | date : "dd/MM/yyyy" }}
-                </td>
-            </ng-container>
+        </td>
+      </ng-container>
 
-            <!-- Row Definition -->
-            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-            <tr
-                    (click)="openAssignmentDialog(row)"
-                    *matRowDef="let row; columns: displayedColumns"
-                    mat-row
-            ></tr>
-        </table>
+      <!-- Due Date Column -->
+      <ng-container matColumnDef="dueDate">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header="dueDate">
+          Date d'échéance
+        </th>
+        <td *matCellDef="let assignment" mat-cell>
+          {{ assignment.dueDate | date : "dd/MM/yyyy" }}
+        </td>
+      </ng-container>
 
-        <!-- paginator -->
-        <mat-paginator
-                [length]="totalAssignments"
-                [pageSizeOptions]="[5, 10, 15]"
-                [pageSize]="assignmentsPerPage"
-                showFirstLastButtons
-        ></mat-paginator>
-    </mat-card-content>
+      <!-- Row Definition -->
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr
+        (click)="openAssignmentDialog(row)"
+        *matRowDef="let row; columns: displayedColumns"
+        mat-row
+      ></tr>
+    </table>
+
+    <!-- paginator -->
+    <mat-paginator
+      [length]="totalAssignments"
+      [pageSizeOptions]="[5, 10, 15]"
+      [pageSize]="assignmentsPerPage"
+      showFirstLastButtons
+    ></mat-paginator>
+  </mat-card-content>
 </mat-card>

@@ -135,10 +135,6 @@ export class AuthService {
     this.router.navigate(['/login']).then((r) => console.log(r));
   }
 
-  public redirectToHome() {
-    this.router.navigate(['/']).then((r) => console.log(r));
-  }
-
   public autoLogin() {
     const token = this.getJwtToken();
     if (token) {
@@ -146,6 +142,15 @@ export class AuthService {
     } else {
       this.router.navigate(['/login']).then((r) => console.log(r));
     }
+  }
+
+  public getUserId() {
+    const token = this.getJwtToken();
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      return decodedToken.id;
+    }
+    return;
   }
 
   private handleError(error: HttpErrorResponse) {
