@@ -13,6 +13,7 @@ export const APP_CONSTANTS = {
   },
   routerLinks: {
     home: '',
+    calendar: 'calendar',
     addAssignment: 'assignments/add',
     listAssignments: 'assignments',
     generateAssignments: 'assignments/generate',

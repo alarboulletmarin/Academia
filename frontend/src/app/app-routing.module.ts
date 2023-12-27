@@ -9,6 +9,7 @@ import { ListAssignmentsPageComponent } from './pages/assignments/list-assignmen
 import { AddAssignmentsPageComponent } from './pages/assignments/add-assignments-page/add-assignments-page.component';
 import { ListUsersPageComponent } from './pages/user/list-users-page/list-users-page.component';
 import { GenerateAssignmentsPageComponent } from './pages/assignments/generate-assignments-page/generate-assignments-page.component';
+import { CalendarComponent } from './pages/calendar/calendar-page/calendar/calendar.component';
 
 const routes: Routes = [
   // AUTH PAGE
@@ -17,9 +18,18 @@ const routes: Routes = [
     component: AuthPageComponent,
     pathMatch: 'full',
   },
+  // HOME PAGE
   {
     path: APP_CONSTANTS.routerLinks.home,
     component: HomePageComponent,
+    pathMatch: 'full',
+    canActivate: [authGuard],
+    data: { expectedRoles: ['professor', 'student'] },
+  },
+  // CALENDAR PAGE
+  {
+    path: APP_CONSTANTS.routerLinks.calendar,
+    component: CalendarComponent,
     pathMatch: 'full',
     canActivate: [authGuard],
     data: { expectedRoles: ['professor', 'student'] },

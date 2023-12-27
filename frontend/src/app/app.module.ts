@@ -22,6 +22,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthInterceptor } from './core/http-interceptors/auth-interceptors';
 import { GenerateAssignmentsPageComponent } from './pages/assignments/generate-assignments-page/generate-assignments-page.component';
+import { CalendarComponent } from './pages/calendar/calendar-page/calendar/calendar.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -37,6 +38,7 @@ const COMPONENTS = [
   PagesNotFoundComponent,
   AssignmentDialogComponent,
   GenerateAssignmentsPageComponent,
+  CalendarComponent,
 ];
 
 @NgModule({

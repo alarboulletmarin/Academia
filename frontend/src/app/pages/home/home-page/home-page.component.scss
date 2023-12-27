@@ -10,5 +10,59 @@
 
 .welcome-section p {
   font-size: 1.2em;
-  color: #555;
+}
+
+.assignments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.assignment-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 100%;
+  border-radius: 5px;
+  padding: 20px;
+  margin: auto auto 20px;
+}
+
+.assignment-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+}
+
+.mat-card-title {
+  font-size: 1.2em;
+  text-transform: capitalize;
+  font-weight: normal;
+}
+
+.mat-card-subtitle, .mat-card-content p {
+  font-size: 0.9em;
+}
+
+.mat-card-content p {
+  line-height: 1.6;
+}
+
+.mat-card-actions {
+  margin-top: 20px;
+}
+
+.mat-card-actions button {
+  background-color: #3f51b5;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-transform: none;
+  font-size: 0.8em;
+  transition: background-color 0.2s ease;
+}
+
+.mat-card-actions button:hover {
+  background-color: #303f9f;
+}
+
+.assignment-card:focus, .mat-card-actions button:focus {
+  outline: 3px solid #3f51b5;
 }
