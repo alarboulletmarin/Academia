@@ -34,7 +34,7 @@ const setupDatabase = (config) => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
-    .then((r) => {
+    .then(() => {
       console.log("Connected to MongoDB");
     })
     .catch((e) => {
