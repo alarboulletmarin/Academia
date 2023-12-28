@@ -31,10 +31,25 @@ export async function createAssignment(req, res) {
   }
 }
 
+/**
+ * Save an assignment to the database.
+ *
+ * @param {Object} assignmentData - The assignment data to be saved.
+ * @param {Object} session - The database session to use.
+ * @return {Promise} - A promise that resolves to the saved assignment object.
+ */
 async function saveAssignment(assignmentData, session) {
   return await new Assignment(assignmentData).save({ session });
 }
 
+/**
+ * Creates submissions for a given assignment in a session.
+ *
+ * @param {Object} createdAssignment - The created assignment object.
+ * @param {Object} session - The session object.
+ * @throws {Error} If the group is not found.
+ * @returns {undefined}
+ */
 async function createSubmissions(createdAssignment, session) {
   const group = await Group.findById(createdAssignment.group).session(session);
   if (!group) throw new Error("Group not found");
@@ -81,12 +96,66 @@ export async function getAssignment(req, res) {
 }
 
 /**
- * Retrieves all assignments from the database and sends them as a JSON response.
+ * Build the filter options based on the request query.
  * @function
+ * @param {Object} req - The request object.
+ * @returns {Promise<Object>} - The filter options.
+ */
+async function buildFilterOptions(req) {
+  const { search = "", subject, professor, dueDate, start, end } = req.query;
+  let searchOptions = search ? { title: new RegExp(search, "i") } : {};
+  let filterOptions = { ...searchOptions };
+
+  if (subject) {
+    let subjectDoc = await Subject.findOne({ name: subject });
+    if (subjectDoc) {
+      filterOptions.subject = subjectDoc._id;
+    }
+  }
+
+  if (professor) {
+    let professorDoc = await Professor.findById(professor);
+    if (professorDoc) {
+      filterOptions.professor = professorDoc._id;
+    }
+  }
+
+  if (dueDate) {
+    filterOptions.dueDate = { ...setDateRange(dueDate) };
+  }
+
+  if (start && end) {
+    filterOptions.dueDate = {
+      $gte: new Date(new Date(start).setHours(0, 0, 0, 0)),
+      $lt: new Date(new Date(end).setHours(23, 59, 59, 999)),
+    };
+  }
+
+  return filterOptions;
+}
+
+/**
+ * Set Date range for filtering.
+ * @function
+ * @param {String} dueDate - The due date string.
+ * @returns {Object} - The date range for filtering.
+ */
+const setDateRange = (dueDate) => {
+  let dueDateObj = new Date(dueDate);
+  return {
+    $gte: new Date(dueDateObj.setHours(0, 0, 0, 0)),
+    $lt: new Date(dueDateObj.setHours(24, 0, 0, 0)),
+  };
+};
+
+/**
+ * Retrieves a list of assignments based on the given criteria.
+ *
  * @async
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
- * @returns {Promise<void>} - A Promise that resolves when the response has been sent.
+ * @returns {Object} - The response JSON object with the list of assignments and pagination details.
+ * @throws {Error} - If there is an error retrieving the assignments.
  */
 export async function getAssignments(req, res) {
   try {
@@ -95,79 +164,27 @@ export async function getAssignments(req, res) {
       limit = 10,
       sortBy = "dueDate",
       order = "asc",
-      search = "",
       paginate = "true",
     } = req.query;
 
-    const skip = (page - 1) * limit;
-    const paginateCondition = paginate === "true";
+    const skip = paginate === "true" ? (page - 1) * limit : 0;
+    const sortOptions = { [sortBy]: order === "asc" ? 1 : -1 };
 
-    let sortOptions = {};
-    sortOptions[sortBy] = order === "asc" ? 1 : -1;
-
-    let searchOptions = search ? { title: new RegExp(search, "i") } : {};
-
-    let filterOptions = { ...searchOptions };
-
-    let subject = req.query.subject;
-
-    if (subject) {
-      let subjectDoc = await Subject.findOne({ name: req.query.subject });
-      if (subjectDoc) {
-        filterOptions.subject = subjectDoc._id;
-      } else {
-        return res.status(404).json({ message: "Subject not found" });
-      }
-    }
-
-    let professorId = req.query.professor;
-
-    if (professorId) {
-      let professorDoc = await Professor.findById(professorId);
-      if (professorDoc) {
-        filterOptions.professor = professorDoc._id;
-      } else {
-        return res.status(404).json({ message: "Professor not found" });
-      }
-    }
-
-    let dueDate = req.query.dueDate;
-    if (dueDate) {
-      let dueDateObj = new Date(dueDate);
-      filterOptions.dueDate = {
-        $gte: new Date(dueDateObj.setHours(0, 0, 0, 0)),
-        $lt: new Date(dueDateObj.setHours(24, 0, 0, 0)),
-      };
-    }
-
-    let start = req.query.start;
-    let end = req.query.end;
-
-    if (start && end) {
-      let startDate = new Date(start).setHours(0, 0, 0, 0);
-      let endDate = new Date(end).setHours(23, 59, 59, 999);
-
-      filterOptions.dueDate = {
-        $gte: new Date(startDate),
-        $lt: new Date(endDate),
-      };
-    }
+    const filterOptions = await buildFilterOptions(req);
 
     let assignmentsQuery = Assignment.find(filterOptions)
       .populate("subject")
       .populate("professor")
       .populate("group")
-      .sort(sortOptions);
-
-    if (paginateCondition) {
-      assignmentsQuery.skip(skip).limit(limit);
-    }
+      .sort(sortOptions)
+      .skip(skip)
+      .limit(limit);
 
     const assignments = await assignmentsQuery;
     const total = await Assignment.countDocuments(filterOptions);
 
     res.json({
-      totalPages: paginateCondition ? Math.ceil(total / limit) : 1,
+      totalPages: Math.ceil(total / limit),
       totalResults: total,
       currentPage: page,
       assignments,
@@ -179,16 +196,14 @@ export async function getAssignments(req, res) {
 }
 
 /**
- * Updates an assignment by ID.
- * @async
- * @function updateAssignment
+ * Updates an assignment.
+ *
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
- * @param {string} req.params.id - The ID of the assignment to update.
- * @param {Object} req.body - The updated assignment data.
- * @returns {Object} The updated assignment.
- * @throws {Object} 404 - If the assignment is not found.
- * @throws {Object} 500 - If there is an error updating the assignment.
+ *
+ * @return {Promise} A promise that resolves to the updated assignment or an error response.
+ *
+ * @throws {Error} If there is an error updating the assignment.
  */
 export async function updateAssignment(req, res) {
   try {
@@ -233,6 +248,17 @@ export async function deleteAssignment(req, res) {
   }
 }
 
+/**
+ * Generates assignments based on the specified number of assignments.
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {number} req.body.numAssignments - The number of assignments to generate.
+ *
+ * @return {Promise} A promise that resolves to the generated assignments.
+ * If successful, the response JSON will contain a success message with the number of assignments created.
+ * If there is an error, the response JSON will contain an error message.
+ */
 export async function generateAssignments(req, res) {
   const numAssignments = req.body.numAssignments;
 
