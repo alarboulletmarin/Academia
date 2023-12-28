@@ -1,44 +1,41 @@
+# This is a GitHub Actions workflow file named 'Dev CI'.
+# It is triggered on every push or pull request to the 'develop' branch.
 name: Dev CI
 on:
-  # Triggers the workflow on push or pull request events but only for the develop branch
   push:
+    # The workflow runs when code is pushed to the 'develop' branch.
     branches: [ develop ]
   pull_request:
+    # The workflow also runs when a pull request is made to the 'develop' branch.
     branches: [ develop ]
 
+# The jobs that the workflow will run.
 jobs:
-  build:
-    # The type of runner that the job will run on
+  setup:
+    # The job runs on the latest version of Ubuntu.
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
+        # The Node.js version to use.
         node-version: [ 20.9.0 ]
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+        # The locations where the job will run.
+        location: [ 'backend', 'frontend' ]
     steps:
-
-      # Checkout the code
       - name: Checkout code
+        # This step checks out the repository's code.
         uses: actions/checkout@v3
-
-      # Specify the version of node to use
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Set up Node version ${{ matrix.node-version }}
+        # This step sets up the specified Node.js version.
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-
-      # BACKEND - Node.js / Express JS
-      - name: Install dependencies backend
-        run: npm install
-        working-directory: backend
-
-      # FRONTEND - Angular
-      - name: Install dependencies frontend
-        run: npm install
-        working-directory: frontend
-
-      - name: Build Angular app
+      - name: Install dependencies for ${{ matrix.location }}
+        # This step installs the dependencies for the specified location.
+        run: npm ci
+        working-directory: ${{ matrix.location }}
+      - name: Build
+        # This step builds the project.
+        # It only runs if the location is 'frontend'.
         run: npm run build
-        working-directory: frontend
-
+        working-directory: ${{ matrix.location }}
+        if: ${{ matrix.location == 'frontend' }}
