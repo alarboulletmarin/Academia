@@ -1,21 +1,28 @@
 /**
- * Handles error occurred during the execution of a request.
+ * Unified error handling middleware.
  *
- * @param {Error} err - The error object containing details of the error.
- * @param {Object} req - The request object with details of the HTTP request.
- * @param {Object} res - The response object used to send the HTTP response.
- * @param {Function} next - The next function to call in the middleware chain.
+ * @param {Error} err - Error object.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
  *
  * @return {void}
  */
-function errorHandler(err, req, res, next) {
+export function errorHandler(err, req, res) {
   const statusCode = err && err.statusCode ? err.statusCode : 500;
-  const message = err.message || "An error occurred";
+  const message = err.message || "Server error";
 
   console.log(err);
   res.status(statusCode).json({ message });
-
-  next();
 }
 
-export default errorHandler;
+/**
+ * Wraps an async function as an Express middleware
+ *
+ * @param {function} fn - The async function to be wrapped
+ * @returns {function} The Express middleware function
+ */
+export function asyncMiddleware(fn) {
+  return (req, res, next) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+  };
+}
