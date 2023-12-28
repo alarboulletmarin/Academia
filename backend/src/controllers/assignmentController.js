@@ -233,6 +233,12 @@ export async function deleteAssignment(req, res) {
   }
 }
 
+/**
+ * Generates assignments based on the given number.
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ */
 export async function generateAssignments(req, res) {
   const numAssignments = req.body.numAssignments;
 
@@ -250,27 +256,37 @@ export async function generateAssignments(req, res) {
     return;
   }
 
-  const assignments = [];
-  for (let i = 0; i < numAssignments; i++) {
-    const assignment = {
-      title: `Devoir ${i + 1}`,
-      description: `Description du devoir ${i + 1}`,
-      dueDate: getRandomDate(new Date(2023, 0, 1), new Date(2024, 11, 31)),
-      subject: subjects[getRandomInt(subjects.length)]._id,
-      group: groups[getRandomInt(groups.length)]._id,
-      professor: professors[getRandomInt(professors.length)]._id,
-    };
-    assignments.push(assignment);
-  }
-
+  // start the session
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
-    await Assignment.insertMany(assignments);
+    for (let i = 0; i < numAssignments; i++) {
+      const assignment = {
+        title: `Devoir ${i + 1}`,
+        description: `Description du devoir ${i + 1}`,
+        dueDate: getRandomDate(new Date(2023, 0, 1), new Date(2024, 11, 31)),
+        subject: subjects[getRandomInt(subjects.length)]._id,
+        group: groups[getRandomInt(groups.length)]._id,
+        professor: professors[getRandomInt(professors.length)]._id,
+      };
+      // Save assignments with session
+      const createdAssignment = await new Assignment(assignment).save({
+        session,
+      });
+      // Create submissions for the current assignment
+      await createSubmissions(createdAssignment, session);
+    }
+
+    await session.commitTransaction();
     res.json({
       message: `${numAssignments} assignments created successfully!`,
     });
   } catch (error) {
     console.error(`Error creating assignments: ${error}`);
+    await session.abortTransaction();
     res.status(500).json({ message: "Error creating assignments" });
+  } finally {
+    session.endSession();
   }
 }
 
