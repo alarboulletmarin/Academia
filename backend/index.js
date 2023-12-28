@@ -2,9 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
-import {config} from "./src/constants/config.js";
+import { config } from "./src/constants/config.js";
 import assignmentRoutes from "./src/api/assignmentRoutes.js";
-import errorHandler from "./src/core/middlewares/errorHandler.js";
 import userRoutes from "./src/api/userRoutes.js";
 import groupRoutes from "./src/api/groupRoutes.js";
 import studentRoutes from "./src/api/studentRoutes.js";
@@ -12,6 +11,7 @@ import subjectRoutes from "./src/api/subjectRoutes.js";
 import professorRoutes from "./src/api/professorRoutes.js";
 import promotionRoutes from "./src/api/promotionRoutes.js";
 import submissionRoutes from "./src/api/submissionRoutes.js";
+import { errorHandler } from "./src/core/middlewares/errorHandler.js";
 
 /**
  * Sets up Cross-Origin Resource Sharing (CORS) for an Express.js app
