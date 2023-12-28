@@ -2,6 +2,8 @@ import Assignment from "../models/Assignment.js";
 import Subject from "../models/Subject.js";
 import Professor from "../models/Professor.js";
 import Group from "../models/Group.js";
+import Submission from "../models/Submission.js";
+import mongoose from "mongoose";
 
 /**
  * Creates a new assignment.
@@ -10,24 +12,42 @@ import Group from "../models/Group.js";
  * @returns {Object} The saved assignment object.
  */
 export async function createAssignment(req, res) {
+  let session;
   try {
-    let attachmentPaths = [];
-    if (req.files && Array.isArray(req.files)) {
-      attachmentPaths = req.files.map((file) => file.path);
-    }
+    // Start transaction
+    session = await mongoose.startSession();
+    session.startTransaction();
+    const createdAssignment = await saveAssignment(req.body, session);
+    await createSubmissions(createdAssignment, session);
+    await session.commitTransaction();
 
-    const assignmentData = {
-      ...req.body,
-      attachments: attachmentPaths,
-    };
-
-    const assignment = new Assignment(assignmentData);
-    const savedAssignment = await assignment.save();
-    res.json(savedAssignment);
+    res.status(201).json(createdAssignment);
   } catch (error) {
     console.error("Error saving assignment:", error);
+    if (session) await session.abortTransaction();
     res.status(500).json({ message: "Error saving assignment" });
+  } finally {
+    if (session) await session.endSession();
   }
+}
+
+async function saveAssignment(assignmentData, session) {
+  return await new Assignment(assignmentData).save({ session });
+}
+
+async function createSubmissions(createdAssignment, session) {
+  const group = await Group.findById(createdAssignment.group).session(session);
+  if (!group) throw new Error("Group not found");
+
+  const submissionDocs = group.students.map((studentId) => ({
+    student: studentId,
+    assignment: createdAssignment._id,
+    isSubmitted: false,
+    grade: null,
+    remarks: "",
+  }));
+
+  await Submission.insertMany(submissionDocs, { session });
 }
 
 /**
