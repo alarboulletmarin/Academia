@@ -57,8 +57,8 @@ frontend/dist
 backend/dist
 
 # Ignore package-lock.json
-frontend/package-lock.json
-backend/package-lock.json
+#frontend/package-lock.json
+#backend/package-lock.json
 
 # Ignore all intellij modules
 Academia.iml
