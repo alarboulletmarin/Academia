@@ -12,6 +12,12 @@ import professorRoutes from "./src/api/professorRoutes.js";
 import promotionRoutes from "./src/api/promotionRoutes.js";
 import submissionRoutes from "./src/api/submissionRoutes.js";
 import { errorHandler } from "./src/core/middlewares/errorHandler.js";
+import { fileURLToPath } from "url";
+import * as path from "path";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * Sets up Cross-Origin Resource Sharing (CORS) for an Express.js app
@@ -65,7 +71,10 @@ const app = express();
 
 // Configures the Express application
 app.use(express.json());
-
+app.use(express.static(path.join(__dirname, "./src/dist/frontend")));
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "./src/dist/frontend/index.html ")),
+);
 setupCORS(app, config.security.cors.allowedOrigins);
 setupDatabase(config);
 setupExpress(app, config.port);
