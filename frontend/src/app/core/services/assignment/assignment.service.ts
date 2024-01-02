@@ -8,7 +8,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root',
 })
 export class AssignmentService {
-  private apiUrl = 'http://localhost:5000/api/assignments';
+  private apiUrl = '/api/assignments';
   private readonly headers = new HttpHeaders();
 
   private assignmentsUpdatedSubject = new Subject<void>();

@@ -8,7 +8,7 @@ import { Promotion } from '../../models/promotion.model';
   providedIn: 'root',
 })
 export class PromotionService {
-  private apiUrl = 'http://localhost:5000/api/promotions';
+  private apiUrl = '/api/promotions';
   private readonly headers = new HttpHeaders();
 
   constructor(

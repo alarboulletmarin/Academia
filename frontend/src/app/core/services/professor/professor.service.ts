@@ -8,7 +8,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root',
 })
 export class ProfessorService {
-  private apiUrl = 'http://localhost:5000/api/professors';
+  private apiUrl = '/api/professors';
   private readonly headers = new HttpHeaders();
 
   constructor(

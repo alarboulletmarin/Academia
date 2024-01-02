@@ -8,7 +8,7 @@ import { Subject } from '../../models/subject.model';
   providedIn: 'root',
 })
 export class SubjectService {
-  private apiUrl = 'http://localhost:5000/api/subjects';
+  private apiUrl = '/api/subjects';
   private readonly headers = new HttpHeaders();
 
   constructor(

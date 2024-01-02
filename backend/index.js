@@ -71,10 +71,15 @@ const app = express();
 
 // Configures the Express application
 app.use(express.json());
+
+// Configures the Express application to serve static files from the frontend
 app.use(express.static(path.join(__dirname, "./src/dist/frontend")));
+
+// Configures the Express application to serve the frontend
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "./src/dist/frontend/index.html ")),
 );
+
 setupCORS(app, config.security.cors.allowedOrigins);
 setupDatabase(config);
 setupExpress(app, config.port);
