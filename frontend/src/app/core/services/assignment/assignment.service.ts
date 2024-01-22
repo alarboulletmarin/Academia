@@ -8,20 +8,17 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root',
 })
 export class AssignmentService {
-  private apiUrl = '/api/assignments';
+  private apiUrl = 'http://localhost:1000/api/assignments';
   private readonly headers = new HttpHeaders();
 
   private assignmentsUpdatedSubject = new Subject<void>();
   public assignmentsUpdatedObservable =
     this.assignmentsUpdatedSubject.asObservable();
 
-  constructor(
-    private http: HttpClient,
-    private authService: AuthService,
-  ) {
+  constructor(private http: HttpClient, private authService: AuthService) {
     this.headers = new HttpHeaders().set(
       'x-auth-token',
-      this.authService.getJwtToken() || '',
+      this.authService.getJwtToken() || ''
     );
   }
 
@@ -38,7 +35,7 @@ export class AssignmentService {
       .pipe(
         tap(() => {
           this.assignmentsUpdatedSubject.next();
-        }),
+        })
       );
   }
 
@@ -50,7 +47,7 @@ export class AssignmentService {
       .pipe(
         tap(() => {
           this.assignmentsUpdatedSubject.next();
-        }),
+        })
       );
   }
 
@@ -60,7 +57,7 @@ export class AssignmentService {
       .pipe(
         tap(() => {
           this.assignmentsUpdatedSubject.next();
-        }),
+        })
       );
   }
 
@@ -69,12 +66,12 @@ export class AssignmentService {
       .post(
         `${this.apiUrl}/generate`,
         { numAssignments: num },
-        { headers: this.headers },
+        { headers: this.headers }
       )
       .pipe(
         tap(() => {
           this.assignmentsUpdatedSubject.next();
-        }),
+        })
       );
   }
 }
