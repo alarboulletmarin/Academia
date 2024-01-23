@@ -115,7 +115,8 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
 
   public openAssignmentDialog(assignment: Assignment): void {
     const dialogRef = this.dialog.open(AssignmentDialogComponent, {
-      width: '500px',
+      width: '800px',
+      height: '800px',
       data: assignment,
     });
 
