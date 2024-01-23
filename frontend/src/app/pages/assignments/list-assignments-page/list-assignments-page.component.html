@@ -4,7 +4,7 @@
     <!-- search box for filtering assignments -->
     <mat-form-field>
       <mat-label>Chercher</mat-label>
-      <input (keyup)="applyFilter($event)" matInput placeholder="Ex. Titre"/>
+      <input (keyup)="applyFilter($event)" matInput placeholder="Ex. Titre" />
     </mat-form-field>
 
     <!-- filter by subject -->
@@ -90,9 +90,9 @@
         </th>
 
         <td *matCellDef="let assignment" mat-cell>
-    <span *ngFor="let group of assignment.group; let isLast=last">
-      {{ group.name }}<span *ngIf="!isLast">, </span>
-    </span>
+          <span *ngFor="let group of assignment.group; let isLast = last">
+            {{ group.name }}<span *ngIf="!isLast">, </span>
+          </span>
         </td>
       </ng-container>
 
@@ -102,7 +102,7 @@
           Date d'échéance
         </th>
         <td *matCellDef="let assignment" mat-cell>
-          {{ assignment.dueDate | date : "dd/MM/yyyy" }}
+          {{ assignment.dueDate | date: "dd/MM/yyyy" }}
         </td>
       </ng-container>
 

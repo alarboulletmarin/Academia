@@ -4,6 +4,8 @@ import { AssignmentService } from '../../../core/services/assignment/assignment.
 import { Assignment } from '../../../core/models/assignment.model';
 import { HttpParams } from '@angular/common/http';
 import { UserService } from '../../../core/services/user/user.service';
+import { AssignmentDialogComponent } from '../../../shared/components/assignment/assignment-dialog/assignment-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home-page',
@@ -19,6 +21,7 @@ export class HomePageComponent implements OnInit {
     private authService: AuthService,
     private assignmentService: AssignmentService,
     private userService: UserService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -59,5 +62,17 @@ export class HomePageComponent implements OnInit {
     );
   }
 
-  viewAssignment(_id: string | undefined) {}
+  public openAssignmentDialog(assignment: Assignment): void {
+    const dialogRef = this.dialog.open(AssignmentDialogComponent, {
+      width: '800px',
+      height: '800px',
+      data: assignment,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'updated') {
+        this.loadAssignmentsOfTheDay();
+      }
+    });
+  }
 }
