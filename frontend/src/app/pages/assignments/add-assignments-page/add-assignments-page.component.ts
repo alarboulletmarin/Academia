@@ -10,6 +10,7 @@ import { SubjectService } from '../../../core/services/subject/subject.service';
 import { GroupService } from '../../../core/services/group/group.service';
 import { AssignmentService } from '../../../core/services/assignment/assignment.service';
 import { Assignment } from '../../../core/models/assignment.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-assignments-page',
@@ -37,6 +38,7 @@ export class AddAssignmentsPageComponent implements OnInit {
     private subjectService: SubjectService,
     private groupService: GroupService,
     private assignmentService: AssignmentService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -94,18 +96,20 @@ export class AddAssignmentsPageComponent implements OnInit {
         group: this.secondFormGroup.value.group,
         attachment: this.thirdFormGroup.value.attachmentValue,
       };
-
+      this.redirectToHome();
       this.assignmentService.addAssignment(newAssignment).subscribe({
         next: () => {
           this.isLoading = false;
-          // Traitez la réponse ici, par exemple redirigez l'utilisateur ou affichez un message de succès
         },
         error: (error) => {
           this.isLoading = false;
-          // Gérez l'erreur ici, par exemple affichez un message d'erreur
         },
       });
     }
+  }
+
+  public redirectToHome() {
+    this.router.navigate(['']);
   }
 
   onDateChange(newDate: Date | null) {
