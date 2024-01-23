@@ -104,9 +104,7 @@ export class AuthService {
   public logout() {
     localStorage.removeItem(this.JWT_TOKEN);
     this.currentTokenSubject.next(null);
-    this.router
-      .navigate([APP_CONSTANTS.routerLinks.auth])
-      .then((r) => console.log(r));
+    this.router.navigate([APP_CONSTANTS.routerLinks.auth]);
   }
 
   /**
@@ -132,15 +130,15 @@ export class AuthService {
   }
 
   public redirectToLogin() {
-    this.router.navigate(['/login']).then((r) => console.log(r));
+    this.router.navigate(['/login']);
   }
 
   public autoLogin() {
     const token = this.getJwtToken();
     if (token) {
-      this.router.navigate(['/']).then((r) => console.log(r));
+      this.router.navigate(['/']);
     } else {
-      this.router.navigate(['/login']).then((r) => console.log(r));
+      this.router.navigate(['/login']);
     }
   }
 

@@ -90,9 +90,9 @@
         </th>
 
         <td *matCellDef="let assignment" mat-cell>
-                    <span *ngFor="let group of assignment.group?.name">
-                      {{ group }}
-                    </span>
+    <span *ngFor="let group of assignment.group; let isLast=last">
+      {{ group.name }}<span *ngIf="!isLast">, </span>
+    </span>
         </td>
       </ng-container>
 
