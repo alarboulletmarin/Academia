@@ -5,19 +5,33 @@
     <h2>Devoirs d'aujourd'hui: {{ assignmentsOfTheDay.length }} au total</h2>
 
     <div class="assignments-grid">
-      <mat-card *ngFor="let assignment of assignmentsOfTheDay.slice(0, 5)" class="assignment-card">
+      <mat-card
+        *ngFor="let assignment of assignmentsOfTheDay.slice(0, 5)"
+        class="assignment-card"
+      >
         <mat-card-title>{{ assignment.title }}</mat-card-title>
-        <mat-card-subtitle>Dû le {{ assignment.dueDate | date:'short' }}</mat-card-subtitle>
+        <mat-card-subtitle
+          >Dû le {{ assignment.dueDate | date: "short" }}</mat-card-subtitle
+        >
         <mat-card-content>
           <p>{{ assignment.description }}</p>
           <p>Sujet: {{ assignment.subject.name }}</p>
-          <p>Groupe(s): <span *ngFor="let group of assignment.group ? assignment.group : []">{{ group.name }}</span></p>
+          <p>
+            Groupe(s):
+            <span *ngFor="let group of assignment.group; let isLast = last">
+              {{ group.name }}<span *ngIf="!isLast">, </span>
+            </span>
+          </p>
         </mat-card-content>
         <mat-card-actions>
-          <button (click)="viewAssignment(assignment._id)" mat-button>Voir le Détail</button>
+          <button (click)="openAssignmentDialog(assignment)" mat-button>
+            Voir le Détail
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
-    <button [routerLink]="['/assignments']" color="primary" mat-raised-button>Voir tous les devoirs</button>
+    <button [routerLink]="['/assignments']" color="primary" mat-raised-button>
+      Voir tous les devoirs
+    </button>
   </div>
 </div>
