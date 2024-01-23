@@ -25,6 +25,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { MatSliderModule } from '@angular/material/slider';
 
 const SHARED_MODULES = [
   CommonModule,
@@ -55,6 +56,7 @@ const SHARED_MODULES = [
   FormsModule,
   FullCalendarModule,
   MatSnackBarModule,
+  MatSliderModule,
 ];
 
 @NgModule({

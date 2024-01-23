@@ -1,3 +1,22 @@
-<p>generate-assignments-page works!</p>
+<div class="container">
+  <mat-card class="result-card">
+    <mat-card-content>
+      <h2 class="title">Selectionner le nombre devoirs</h2>
 
-<button (click)="onGenerate()">Generate Assignments</button>
+      <mat-slider
+        [discrete]="thumbLabel"
+        [max]="max"
+        [min]="min"
+        [showTickMarks]="showTicks"
+        [step]="step"
+        class="slider-margin">
+        <input #slider [(ngModel)]="value" matSliderThumb>
+      </mat-slider>
+
+      <p class="value-label">Nombre de devoirs: {{slider.value}}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <button (click)="onGenerate()" [disabled]="isLoading" color="primary" mat-raised-button>Générer des devoirs</button>
+  <mat-progress-spinner *ngIf="isLoading" class="spinner" mode="indeterminate"></mat-progress-spinner>
+</div>
