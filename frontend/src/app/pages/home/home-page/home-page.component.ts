@@ -30,7 +30,6 @@ export class HomePageComponent implements OnInit {
 
   public loadAssignmentsOfTheDay(): void {
     const currentDate = new Date();
-    console.log(currentDate);
 
     this.userService.getUser(this.authService.getUserId()).subscribe(
       (user) => {
@@ -46,7 +45,6 @@ export class HomePageComponent implements OnInit {
             next: ({ assignments, totalResults }) => {
               this.assignmentsOfTheDay = assignments;
               this.totalAssignments = totalResults;
-              console.log('Assignments of the day:', assignments);
             },
             error: (error) =>
               console.error('Error fetching assignments:', error),
