@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AssignmentService } from '../../../core/services/assignment/assignment.service';
+import { catchError, finalize, throwError } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-generate-assignments-page',
@@ -7,11 +9,38 @@ import { AssignmentService } from '../../../core/services/assignment/assignment.
   styleUrl: './generate-assignments-page.component.scss',
 })
 export class GenerateAssignmentsPageComponent {
-  constructor(private assignmentService: AssignmentService) {}
+  max = 1000;
+  min = 1;
+  showTicks = true;
+  step = 1;
+  thumbLabel = true;
+  value = 1;
+  isLoading = false;
+  constructor(
+    private assignmentService: AssignmentService,
+    private snackBar: MatSnackBar,
+  ) {}
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, { duration: 2500 });
+  }
 
   onGenerate() {
+    this.isLoading = true;
     this.assignmentService
-      .generateAssignments(100)
-      .subscribe(() => console.log('Assignments generated successfully'));
+      .generateAssignments(this.value)
+      .pipe(
+        catchError((err) => {
+          this.openSnackBar(
+            'Erreur pendant la génération des assignments',
+            'OK',
+          );
+          return throwError(err);
+        }),
+        finalize(() => (this.isLoading = false)),
+      )
+      .subscribe(() => {
+        this.openSnackBar('Devoirs générés avec succès', 'OK');
+      });
   }
 }
