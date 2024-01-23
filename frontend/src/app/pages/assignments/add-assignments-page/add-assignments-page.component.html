@@ -35,7 +35,7 @@
               </div>
             </div>
             <div class="button-navigation">
-              <button mat-button matStepperNext>Continuer</button>
+              <button mat-flat-button color="primary" mat-button matStepperNext>Continuer</button>
             </div>
           </form>
         </mat-step>
@@ -107,56 +107,12 @@
               </div>
             </div>
             <div class="button-navigation">
-              <button mat-button matStepperPrevious>Retour</button>
-              <button mat-button matStepperNext>Continuer</button>
+              <button mat-flat-button color="primary" mat-button matStepperPrevious>Retour</button>
+              <button mat-flat-button color="primary" mat-button matStepperNext>Continuer</button>
             </div>
           </form>
         </mat-step>
-        <!-- Étape 3: Pièces jointes -->
-        <mat-step [stepControl]="thirdFormGroup">
-          <form [formGroup]="thirdFormGroup">
-            <ng-template matStepLabel>Étape 3: Pièces jointes</ng-template>
-
-            <!-- Type de pièce jointe -->
-            <mat-form-field>
-              <mat-label>Type de pièce jointe</mat-label>
-              <mat-select formControlName="attachmentType">
-                <mat-option value="link">Lien Web</mat-option>
-                <mat-option value="file">Fichier</mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <!-- Valeur de la pièce jointe -->
-            <mat-form-field
-              *ngIf="thirdFormGroup.value.attachmentType === 'link'"
-            >
-              <mat-label>Lien Web</mat-label>
-              <input formControlName="attachmentValue" matInput/>
-            </mat-form-field>
-            <mat-form-field
-              *ngIf="thirdFormGroup.value.attachmentType === 'file'"
-            >
-              <mat-label>Fichier</mat-label>
-              <input (change)="onFileSelected($event)" matInput type="file"/>
-            </mat-form-field>
-
-            <!-- Bouton pour ajouter la pièce jointe -->
-            <button (click)="addAttachment()" color="primary" mat-raised-button>
-              Ajouter
-            </button>
-
-            <!-- Liste des pièces jointes -->
-            <div *ngFor="let attachment of attachments">
-              {{ attachment.type }}: {{ attachment.value }}
-            </div>
-
-            <div class="button-navigation">
-              <button mat-button matStepperPrevious>Retour</button>
-              <button mat-button matStepperNext>Continuer</button>
-            </div>
-          </form>
-        </mat-step>
-        <!-- Étape 4: Résumé -->
+        <!-- Étape 3: Résumé -->
         <mat-step>
           <ng-template matStepLabel>Résumé</ng-template>
 
@@ -182,13 +138,26 @@
                     {{ secondFormGroup.value.dueDate | date : "dd/MM/yyyy" }}
                   </p>
                 </mat-list-item>
+                <mat-list-item>
+                  <h4 matLine>Matière</h4>
+                  <p class="mat-body-1" matLine>
+                    {{ secondFormGroup.value.subject.name }}
+                  </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <h4 matLine>Professeur</h4>
+                  <p class="mat-body-1" matLine>
+                    {{ secondFormGroup.value.professor.firstName }}
+                    {{ secondFormGroup.value.professor.lastName }}
+                  </p>
+                </mat-list-item>
               </mat-list>
             </mat-card-content>
           </mat-card>
 
           <div class="button-navigation">
-            <button mat-button matStepperPrevious>Retour</button>
-            <button (click)="submit()" mat-button>Terminer</button>
+            <button mat-flat-button color="primary" mat-button matStepperPrevious>Retour</button>
+            <button mat-flat-button color="primary" (click)="submit()" mat-button>Terminer</button>
           </div>
         </mat-step>
       </mat-horizontal-stepper>
