@@ -4,28 +4,27 @@
   </div>
 
   <mat-card class="stepper-container">
-    <mat-card-title>Ajouter un devoir</mat-card-title>
+    <mat-card-title>{{"title.addAssignment" | translate}}</mat-card-title>
 
     <mat-card-content>
       <mat-horizontal-stepper #stepper [linear]="true">
         <mat-step [stepControl]="firstFormGroup">
           <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel
-            >Étape 1: Informations de Base
+            >{{"add.step1" | translate }}
             </ng-template
             >
-
             <div class="fields-container">
               <div class="form-field-container">
                 <mat-form-field>
-                  <mat-label>Titre</mat-label>
+                  <mat-label>{{"assignment.title" | translate }}</mat-label>
                   <input formControlName="title" matInput required/>
                 </mat-form-field>
               </div>
 
               <div class="form-field-container">
                 <mat-form-field>
-                  <mat-label>Description</mat-label>
+                  <mat-label>{{"assignment.description" | translate }}</mat-label>
                   <textarea
                     formControlName="description"
                     matInput
@@ -35,7 +34,7 @@
               </div>
             </div>
             <div class="button-navigation">
-              <button mat-flat-button color="primary" mat-button matStepperNext>Continuer</button>
+              <button mat-flat-button color="primary" mat-button matStepperNext>{{"button.next" | translate}}</button>
             </div>
           </form>
         </mat-step>
@@ -43,14 +42,14 @@
         <mat-step [stepControl]="secondFormGroup">
           <form [formGroup]="secondFormGroup">
             <ng-template matStepLabel
-            >Étape 2: Informations Complémentaires
+            >{{"add.step2" | translate }}
             </ng-template
             >
 
             <div class="step-two-container">
               <div class="calendar-container">
                 <mat-form-field class="form-field-calendar">
-                  <mat-label>Date Limite</mat-label>
+                  <mat-label>{{"assignment.dueDate" | translate}}</mat-label>
                   <input
                     [matDatepicker]="picker"
                     formControlName="dueDate"
@@ -71,7 +70,7 @@
               <div class="form-fields-container">
                 <!-- Subject -->
                 <mat-form-field>
-                  <mat-label>Matière</mat-label>
+                  <mat-label>{{"assignment.subject" | translate}}</mat-label>
                   <mat-select formControlName="subject" required>
                     <mat-option
                       *ngFor="let subject of subjects"
@@ -84,7 +83,7 @@
 
                 <!-- Professor -->
                 <mat-form-field>
-                  <mat-label>Professeur</mat-label>
+                  <mat-label>{{"assignment.teacher" | translate}}</mat-label>
                   <mat-select formControlName="professor" required>
                     <mat-option
                       *ngFor="let professor of professors"
@@ -97,7 +96,7 @@
 
                 <!-- Group -->
                 <mat-form-field>
-                  <mat-label>Groupe</mat-label>
+                  <mat-label>{{"assignment.group" | translate}}</mat-label>
                   <mat-select formControlName="group" required>
                     <mat-option *ngFor="let group of allGroups" [value]="group">
                       {{ group.name }} - {{ group.promotion.name }}
@@ -107,45 +106,45 @@
               </div>
             </div>
             <div class="button-navigation">
-              <button mat-flat-button color="primary" mat-button matStepperPrevious>Retour</button>
-              <button mat-flat-button color="primary" mat-button matStepperNext>Continuer</button>
+              <button mat-flat-button color="primary" mat-button matStepperPrevious>{{"button.back" | translate}}</button>
+              <button mat-flat-button color="primary" mat-button matStepperNext>{{"button.next" | translate}}</button>
             </div>
           </form>
         </mat-step>
         <!-- Étape 3: Résumé -->
         <mat-step>
-          <ng-template matStepLabel>Résumé</ng-template>
+          <ng-template matStepLabel>{{"add.step3" | translate}}</ng-template>
 
           <mat-card class="summary-card">
-            <mat-card-title>Résumé de votre devoir</mat-card-title>
+            <mat-card-title>{{"add.summary" | translate}}</mat-card-title>
             <mat-card-content>
               <mat-list>
                 <mat-list-item>
-                  <h4 matLine>Titre</h4>
+                  <h4 matLine>{{"assignment.title" | translate}}</h4>
                   <p class="mat-body-1" matLine>
                     {{ firstFormGroup.value.title }}
                   </p>
                 </mat-list-item>
                 <mat-list-item>
-                  <h4 matLine>Description</h4>
+                  <h4 matLine>{{"assignment.description" | translate}}</h4>
                   <p class="mat-body-1" matLine>
                     {{ firstFormGroup.value.description }}
                   </p>
                 </mat-list-item>
                 <mat-list-item>
-                  <h4 matLine>Date Limite</h4>
+                  <h4 matLine>{{"assignment.dueDate" | translate}}</h4>
                   <p class="mat-body-1" matLine>
                     {{ secondFormGroup.value.dueDate | date : "dd/MM/yyyy" }}
                   </p>
                 </mat-list-item>
                 <mat-list-item>
-                  <h4 matLine>Matière</h4>
+                  <h4 matLine>{{"assignment.subject" | translate}}</h4>
                   <p class="mat-body-1" matLine>
                     {{ secondFormGroup.value.subject.name }}
                   </p>
                 </mat-list-item>
                 <mat-list-item>
-                  <h4 matLine>Professeur</h4>
+                  <h4 matLine>{{"assignment.teacher"| translate}}</h4>
                   <p class="mat-body-1" matLine>
                     {{ secondFormGroup.value.professor.firstName }}
                     {{ secondFormGroup.value.professor.lastName }}
@@ -156,8 +155,8 @@
           </mat-card>
 
           <div class="button-navigation">
-            <button mat-flat-button color="primary" mat-button matStepperPrevious>Retour</button>
-            <button mat-flat-button color="primary" (click)="submit()" mat-button>Terminer</button>
+            <button mat-flat-button color="primary" mat-button matStepperPrevious>{{"button.back" | translate}}</button>
+            <button mat-flat-button color="primary" (click)="submit()" mat-button>{{"button.finish" | translate}}</button>
           </div>
         </mat-step>
       </mat-horizontal-stepper>

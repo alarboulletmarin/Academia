@@ -1,24 +1,24 @@
 <!-- tableau avec angular material pour afficher les user avec leur email, passwor, role et profile -->
 
 <mat-card>
-  <mat-card-title>Liste des utilisateurs</mat-card-title>
+  <mat-card-title>{{ "user.listUser" | translate }}</mat-card-title>
   <mat-card-content>
     <table [dataSource]="users" class="mat-elevation-z8" mat-table>
       <!-- Email Column -->
       <ng-container matColumnDef="email">
-        <th *matHeaderCellDef mat-header-cell>Email</th>
+        <th *matHeaderCellDef mat-header-cell>{{"auth.email" | translate}}
         <td *matCellDef="let element" mat-cell>{{ element.email }}</td>
       </ng-container>
 
       <!-- Password Column -->
       <ng-container matColumnDef="password">
-        <th *matHeaderCellDef mat-header-cell>Password</th>
+        <th *matHeaderCellDef mat-header-cell>{{"auth.password" | translate}}
         <td *matCellDef="let element" mat-cell>{{ element.password }}</td>
       </ng-container>
 
       <!-- Role Column -->
       <ng-container matColumnDef="role">
-        <th *matHeaderCellDef mat-header-cell>Role</th>
+        <th *matHeaderCellDef mat-header-cell>{{"user.role" | translate}}
         <td *matCellDef="let element" mat-cell>{{ element.role }}</td>
       </ng-container>
 

@@ -23,22 +23,22 @@
       <!-- Liens communs à tous les utilisateurs -->
       <a mat-list-item routerLink="/assignments">
         <mat-icon>list</mat-icon>
-        Liste des devoirs
+        {{"title.listAssignments" | translate}}
       </a>
 
       <!-- Liens spécifiques pour les professeurs -->
       <ng-container *ngIf="user.role === 'professor'">
         <a mat-list-item routerLink="/assignments/add">
           <mat-icon>add</mat-icon>
-          Ajouter un devoir
+          {{ "title.addAssignment" | translate }}
         </a>
         <a mat-list-item routerLink="/users">
           <mat-icon>people</mat-icon>
-          Gérer les utilisateurs
+          {{ "title.manageUser" | translate }}
         </a>
         <a mat-list-item routerLink="/assignments/generate">
           <mat-icon>build</mat-icon>
-          Données de test (Dev)
+          {{ "title.testDev" | translate }}
         </a>
       </ng-container>
 
@@ -46,11 +46,11 @@
       <ng-container *ngIf="user.role === 'student'">
         <a mat-list-item routerLink="/grades">
           <mat-icon>grade</mat-icon>
-          Mes notes
+          {{ "title.myGrades" | translate }}
         </a>
         <a mat-list-item routerLink="/resources">
           <mat-icon>library_books</mat-icon>
-          Ressources
+          {{ "title.resources" | translate }}
         </a>
       </ng-container>
     </mat-nav-list>
