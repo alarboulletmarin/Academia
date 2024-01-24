@@ -14,8 +14,9 @@
 }
 
 .stepper-container {
-  height: 700px;
+  height: 800px;
   padding: 20px;
+  padding-bottom: 54%;
   text-align: center;
   box-sizing: border-box;
 }
@@ -95,13 +96,8 @@ mat-form-field {
 }
 
 mat-list-item {
-  padding-top: 50px;
-  padding-bottom: 35px;
-}
-
-mat-list-item.h4 {
-  padding-bottom: 25px;
-  margin-bottom: 10px;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 
