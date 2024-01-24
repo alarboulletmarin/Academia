@@ -44,7 +44,6 @@ export class AssignmentDialogComponent implements OnInit {
     this.isProfessor = this.authService.hasRole('professor');
     this.isGrading = this.data.isGrading;
     this.tempAssignment = { ...this.data.assignment };
-    console.log(this.tempAssignment);
 
     this.subjectService.getSubjects().subscribe((subjects) => {
       this.subjects = subjects;
