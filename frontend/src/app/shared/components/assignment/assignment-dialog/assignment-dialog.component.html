@@ -2,17 +2,17 @@
 <mat-dialog-content>
   <form class="form-edit">
     <mat-form-field class="field">
-      <mat-label class="label">Titre</mat-label>
+      <mat-label class="label">{{ "assignment.title" | translate }}</mat-label>
       <input [(ngModel)]="tempAssignment.title" [disabled]="!isEditMode" class="input" matInput name="title"/>
     </mat-form-field>
 
     <mat-form-field class="field">
-      <mat-label class="label">Description</mat-label>
+      <mat-label class="label">{{ "assignment.description" | translate }}</mat-label>
       <input [(ngModel)]="tempAssignment.description" [disabled]="!isEditMode" class="input" matInput name="description"/>
     </mat-form-field>
 
     <mat-form-field class="field">
-      <mat-label class="label">Date de remise</mat-label>
+      <mat-label class="label">{{ "assignment.dueDate" | translate }}</mat-label>
       <input [(ngModel)]="tempAssignment.dueDate" [disabled]="!isEditMode" [matDatepicker]="picker" class="input" matInput name="date"/>
       <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -20,7 +20,7 @@
 
     <div class="row">
       <mat-form-field class="field">
-        <mat-label class="label">Professeur</mat-label>
+        <mat-label class="label">{{ "assignment.teacher" | translate }}</mat-label>
         <mat-select [(ngModel)]="tempAssignment.professor._id" [disabled]="!isEditMode" [ngModelOptions]="{standalone: true}" class="input">
           <mat-option *ngFor="let professor of professors" [value]="professor._id">
             {{ professor.firstName }} {{ professor.lastName }}
@@ -29,7 +29,7 @@
       </mat-form-field>
 
       <mat-form-field class="field">
-        <mat-label class="label">Matière</mat-label>
+        <mat-label class="label">{{ "assignment.subject" | translate }}</mat-label>
         <mat-select [(ngModel)]="tempAssignment.subject._id" [disabled]="!isEditMode" [ngModelOptions]="{standalone: true}" class="input">
           <mat-option *ngFor="let subject of subjects" [value]="subject._id">
             {{ subject.name }}
@@ -54,33 +54,33 @@
     *ngIf="isProfessor && !isEditMode"
     color="primary" mat-raised-button
   >
-    Modifier
+    {{ "button.edit" | translate }}
   </button>
   <button
     (click)="saveChanges()"
     *ngIf="isProfessor && isEditMode"
     color="primary" mat-raised-button
   >
-    Sauvegarder
+    {{ "button.save" | translate }}
   </button>
   <button
     (click)="toggleEditMode()"
     *ngIf="isProfessor && isEditMode"
     color="accent" mat-raised-button
   >
-    Annuler
+    {{ "button.cancel" | translate }}
   </button>
   <button
     (click)="deleteAssignment()"
     *ngIf="isProfessor && isEditMode"
     color="warn" mat-raised-button
   >
-    Supprimer
+    {{ "button.delete" | translate}}
   </button>
   <button
     mat-dialog-close
     mat-raised-button
   >
-    Fermer
+    {{ "button.close" | translate }}
   </button>
 </mat-dialog-actions>

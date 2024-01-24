@@ -1,11 +1,98 @@
 {
   "lang": {
-    "de": "Allemand",
-    "en": "Anglais",
+    "de": "Deutsch",
+    "en": "English",
     "fr": "Français",
-    "it": "Italien"
+    "it": "Italiano",
+    "es": "Español"
   },
   "label": {
-    "home": "Accueil"
+    "home": "Accueil",
+    "about": "À propos"
+  },
+  "button":{
+    "back": "Retour",
+    "next": "Suivant",
+    "finish": "Terminer",
+    "generate": "Générer les devoirs",
+    "modify": "Modifier",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "add": "Ajouter",
+    "edit": "Éditer",
+    "close": "Fermer"
+  },
+  "title": {
+    "addAssignment": "Ajouter un devoir",
+    "listAssignments": "Liste des devoirs",
+    "manageUser": "Gérer des utilisateurs",
+    "noter": "Noter un devoir",
+    "testDev": "Données de test (Dev)",
+    "myGrades": "Mes notes",
+    "ressources": "Ressources",
+    "myCalendar": "Mon calendrier",
+    "calendar": "Calendrier des devoirs",
+    "settings": "Paramètres"
+  },
+
+  "assignment":{
+    "type": "Devoir",
+    "title": "Titre",
+    "description": "Description",
+    "dateLimit": "Date limite",
+    "duration": "Durée",
+    "subject": "Matière",
+    "teacher": "Professeur",
+    "dueDate": "Date de remise",
+    "group": "Groupe"
+  },
+
+  "add":{
+    "title": "Titre",
+    "description": "Description",
+    "dateLimit": "Date limite",
+    "duration": "Durée",
+    "subject": "Matière",
+    "teacher": "Professeur",
+    "group": "Groupe",
+    "step1": "Étape 1 : Informations de base",
+    "step2": "Étape 2 : Informations complémentaires",
+    "step3": "Étape 3 : Récapitulatif",
+    "summary": "Récapitulatif"
+  },
+
+  "generate":{
+    "title" : "Selectionner le nombre devoirs",
+    "number" : "Nombre de devoirs"
+  },
+
+  "textInput": {
+    "search": "Rechercher"
+  },
+
+  "auth": {
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "username": "Nom d'utilisateur",
+    "email": "Adresse électronique",
+    "password": "Mot de passe",
+    "error": "Erreur de connexion"
+  },
+
+  "home": {
+    "welcome": "Bienvenue sur  Academia !",
+    "description": "Cette application permet de gérer les devoirs des élèves d'une école.",
+    "dailyAssignment": "Devoirs d'aujourd'hui",
+    "noAssignment": "Aucun devoir pour aujourd'hui",
+    "due" : "Dû le",
+    "groups" : "Groupe(s)",
+    "subject" : "Sujet",
+    "details" : "Voir les détails",
+    "allAssignments" : "Voir tous les devoirs"
+  },
+  "user":{
+    "list": "Liste des utilisateurs",
+    "role": "Rôle"
   }
 }

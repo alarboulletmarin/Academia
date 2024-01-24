@@ -1,7 +1,7 @@
 <div class="container">
   <mat-card class="result-card">
     <mat-card-content>
-      <h2 class="title">Selectionner le nombre devoirs</h2>
+      <h2 class="title"> {{"generate.title" | translate }} </h2>
 
       <mat-slider
         [discrete]="thumbLabel"
@@ -13,10 +13,10 @@
         <input #slider [(ngModel)]="value" matSliderThumb>
       </mat-slider>
 
-      <p class="value-label">Nombre de devoirs: {{slider.value}}</p>
+      <p class="value-label"> {{"generate.number" | translate }} : {{slider.value}}</p>
     </mat-card-content>
   </mat-card>
 
-  <button (click)="onGenerate()" [disabled]="isLoading" color="primary" mat-raised-button>Générer des devoirs</button>
+  <button (click)="onGenerate()" [disabled]="isLoading" color="primary" mat-raised-button>{{"button.generate" | translate}}</button>
   <mat-progress-spinner *ngIf="isLoading" class="spinner" mode="indeterminate"></mat-progress-spinner>
 </div>

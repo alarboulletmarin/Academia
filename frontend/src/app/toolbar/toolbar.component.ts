@@ -12,7 +12,8 @@ import { ThemeService } from '../core/services/theme/theme.service';
 export class ToolbarComponent implements OnInit {
   public savedLanguage: string | undefined;
   public isDarkTheme: boolean = false;
-  public languages: string[] = ['fr', 'en', 'de', 'es', 'it'];
+  public languages: string[] = ['Français', 'English', 'Deutsch', 'Español', 'Italiano'];
+  public buttonLanguages = {'Français': 'fr', 'English': 'en', 'Deutsch': 'de', 'Español': 'es', 'Italiano': 'it'};
 
   constructor(
     private sidenavService: SidenavService,
@@ -27,7 +28,11 @@ export class ToolbarComponent implements OnInit {
   }
 
   public useLanguage(language: string): void {
-    this.i18nService.useLanguage(language);
+    const languageIndex = this.buttonLanguages[language as keyof typeof this.buttonLanguages];
+    if (languageIndex === undefined) {
+      return;
+    }
+    this.i18nService.useLanguage(languageIndex);
   }
 
   public toggleSidenav() {
