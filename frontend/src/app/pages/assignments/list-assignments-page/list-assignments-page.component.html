@@ -58,7 +58,9 @@
     >
       <!-- Title Column -->
       <ng-container matColumnDef="title">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header="title">{{"assignment.title" | translate }}</th>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header="title">
+          {{ "assignment.title" | translate }}
+        </th>
         <td *matCellDef="let assignment" mat-cell>{{ assignment.title }}</td>
       </ng-container>
 
@@ -69,6 +71,16 @@
         </th>
         <td *matCellDef="let assignment" mat-cell>
           {{ assignment.description }}
+        </td>
+      </ng-container>
+
+      <!-- Subject Column -->
+      <ng-container matColumnDef="subject">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header="subject">
+          {{ "assignment.subject" | translate }}
+        </th>
+        <td *matCellDef="let assignment" mat-cell>
+          {{ assignment.subject.name }}
         </td>
       </ng-container>
 

@@ -8,6 +8,7 @@ import { ProfessorService } from './services/professor/professor.service';
 import { SidenavService } from './services/sidenav/sidenav.service';
 import { UserService } from './services/user/user.service';
 import { I18nService } from './services/i18n/i18n.service';
+import { SubmissionService } from './services/submission/submission.service';
 
 @NgModule({
   imports: [],
@@ -17,6 +18,7 @@ import { I18nService } from './services/i18n/i18n.service';
     GroupService,
     ProfessorService,
     SidenavService,
+    SubmissionService,
     UserService,
     I18nService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -15,10 +15,13 @@ export class AssignmentService {
   public assignmentsUpdatedObservable =
     this.assignmentsUpdatedSubject.asObservable();
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+  ) {
     this.headers = new HttpHeaders().set(
       'x-auth-token',
-      this.authService.getJwtToken() || ''
+      this.authService.getJwtToken() || '',
     );
   }
 
@@ -35,7 +38,7 @@ export class AssignmentService {
       .pipe(
         tap(() => {
           this.assignmentsUpdatedSubject.next();
-        })
+        }),
       );
   }
 
@@ -47,7 +50,7 @@ export class AssignmentService {
       .pipe(
         tap(() => {
           this.assignmentsUpdatedSubject.next();
-        })
+        }),
       );
   }
 
@@ -57,7 +60,7 @@ export class AssignmentService {
       .pipe(
         tap(() => {
           this.assignmentsUpdatedSubject.next();
-        })
+        }),
       );
   }
 
@@ -66,12 +69,20 @@ export class AssignmentService {
       .post(
         `${this.apiUrl}/generate`,
         { numAssignments: num },
-        { headers: this.headers }
+        { headers: this.headers },
       )
       .pipe(
         tap(() => {
           this.assignmentsUpdatedSubject.next();
-        })
+        }),
       );
+  }
+
+  getAssignmentsForProfessor(professorId: string): Observable<any> {
+    const params = new HttpParams().set('professor', professorId);
+    return this.http.get<any>(this.apiUrl, {
+      headers: this.headers,
+      params: params,
+    });
   }
 }
