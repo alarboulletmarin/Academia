@@ -26,6 +26,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const SHARED_MODULES = [
   CommonModule,
@@ -57,6 +58,7 @@ const SHARED_MODULES = [
   FullCalendarModule,
   MatSnackBarModule,
   MatSliderModule,
+  MatTabsModule,
 ];
 
 @NgModule({

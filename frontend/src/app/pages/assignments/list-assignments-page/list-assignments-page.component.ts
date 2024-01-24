@@ -21,6 +21,7 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
   public displayedColumns: string[] = [
     'title',
     'description',
+    'subject',
     'professor',
     'group',
     'dueDate',
@@ -38,6 +39,7 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
 
   public currentSubject = '';
   public currentProfessor = '';
+  public currentGroup: [] = [];
 
   constructor(
     private assignmentService: AssignmentService,
@@ -82,7 +84,8 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
       .set('order', this.currentSortDirection)
       .set('search', this.currentSearchTerm)
       .set('subject', this.currentSubject)
-      .set('professor', this.currentProfessor);
+      .set('professor', this.currentProfessor)
+      .set('group', this.currentGroup.toString());
 
     this.assignmentService.getAssignments(params).subscribe({
       next: ({ assignments, totalResults }) => {
@@ -117,7 +120,10 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(AssignmentDialogComponent, {
       width: '800px',
       height: '800px',
-      data: assignment,
+      data: {
+        assignment: assignment,
+        isGrading: false,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

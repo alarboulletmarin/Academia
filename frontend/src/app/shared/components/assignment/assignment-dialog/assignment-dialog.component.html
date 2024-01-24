@@ -1,86 +1,213 @@
-<h2 mat-dialog-title>Devoir</h2>
-<mat-dialog-content>
-  <form class="form-edit">
-    <mat-form-field class="field">
-      <mat-label class="label">{{ "assignment.title" | translate }}</mat-label>
-      <input [(ngModel)]="tempAssignment.title" [disabled]="!isEditMode" class="input" matInput name="title"/>
-    </mat-form-field>
+<h2 mat-dialog-title>
+  {{ "label.infoAssignment" | translate }} -
+  {{ tempAssignment.title }}
+</h2>
+<mat-tab-group dynamicHeight>
+  <!--  tab-1  -->
+  <mat-tab label="{{ 'tab.assignments' | translate }}">
+    <mat-dialog-content>
+      <form class="form-edit">
+        <mat-form-field class="field">
+          <mat-label class="label">{{
+            "assignment.title" | translate
+          }}</mat-label>
+          <input
+            [(ngModel)]="tempAssignment.title"
+            [disabled]="!isEditMode || isGrading"
+            class="input"
+            matInput
+            name="title"
+          />
+        </mat-form-field>
 
-    <mat-form-field class="field">
-      <mat-label class="label">{{ "assignment.description" | translate }}</mat-label>
-      <input [(ngModel)]="tempAssignment.description" [disabled]="!isEditMode" class="input" matInput name="description"/>
-    </mat-form-field>
+        <mat-form-field class="field">
+          <mat-label class="label">{{
+            "assignment.description" | translate
+          }}</mat-label>
+          <input
+            [(ngModel)]="tempAssignment.description"
+            [disabled]="!isEditMode || isGrading"
+            class="input"
+            matInput
+            name="description"
+          />
+        </mat-form-field>
 
-    <mat-form-field class="field">
-      <mat-label class="label">{{ "assignment.dueDate" | translate }}</mat-label>
-      <input [(ngModel)]="tempAssignment.dueDate" [disabled]="!isEditMode" [matDatepicker]="picker" class="input" matInput name="date"/>
-      <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+        <mat-form-field class="field">
+          <mat-label class="label">{{
+            "assignment.dueDate" | translate
+          }}</mat-label>
+          <input
+            [(ngModel)]="tempAssignment.dueDate"
+            [disabled]="!isEditMode || isGrading"
+            [matDatepicker]="picker"
+            class="input"
+            matInput
+            name="date"
+          />
+          <mat-datepicker-toggle
+            [for]="picker"
+            matSuffix
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-    <div class="row">
-      <mat-form-field class="field">
-        <mat-label class="label">{{ "assignment.teacher" | translate }}</mat-label>
-        <mat-select [(ngModel)]="tempAssignment.professor._id" [disabled]="!isEditMode" [ngModelOptions]="{standalone: true}" class="input">
-          <mat-option *ngFor="let professor of professors" [value]="professor._id">
-            {{ professor.firstName }} {{ professor.lastName }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+        <div class="row">
+          <mat-form-field class="field">
+            <mat-label class="label">{{
+              "assignment.teacher" | translate
+            }}</mat-label>
+            <mat-select
+              [(ngModel)]="tempAssignment.professor._id"
+              [disabled]="!isEditMode || isGrading"
+              [ngModelOptions]="{ standalone: true }"
+              class="input"
+            >
+              <mat-option
+                *ngFor="let professor of professors"
+                [value]="professor._id"
+              >
+                {{ professor.firstName }} {{ professor.lastName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
-      <mat-form-field class="field">
-        <mat-label class="label">{{ "assignment.subject" | translate }}</mat-label>
-        <mat-select [(ngModel)]="tempAssignment.subject._id" [disabled]="!isEditMode" [ngModelOptions]="{standalone: true}" class="input">
-          <mat-option *ngFor="let subject of subjects" [value]="subject._id">
-            {{ subject.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+          <mat-form-field class="field">
+            <mat-label class="label">{{
+              "assignment.subject" | translate
+            }}</mat-label>
+            <mat-select
+              [(ngModel)]="tempAssignment.subject._id"
+              [disabled]="!isEditMode || isGrading"
+              [ngModelOptions]="{ standalone: true }"
+              class="input"
+            >
+              <mat-option
+                *ngFor="let subject of subjects"
+                [value]="subject._id"
+              >
+                {{ subject.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-    <div *ngFor="let group of groups">
-      <mat-checkbox [(ngModel)]="selectedGroups[group._id]" [disabled]="!isEditMode" [ngModelOptions]="{standalone: true}">
-        {{ group.name }}
-      </mat-checkbox>
-    </div>
-  </form>
+        <div *ngFor="let group of groups">
+          <mat-checkbox
+            [(ngModel)]="selectedGroups[group._id]"
+            [disabled]="!isEditMode || isGrading"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            {{ group.name }}
+          </mat-checkbox>
+        </div>
+      </form>
 
-  <mat-divider class="divider"></mat-divider>
-</mat-dialog-content>
+      <mat-divider class="divider"></mat-divider>
+    </mat-dialog-content>
+  </mat-tab>
+  <!--  tab-2  -->
+  <mat-tab label="{{ 'tab.grading' | translate }}">
+    <mat-dialog-content>
+      <form class="form-edit">
+        <!-- Show student name -->
+        <div class="row">
+          {{ "student.type" | translate }} :
+          {{ tempAssignment.student?.firstName }}
+          {{ tempAssignment.student?.lastName }}
+        </div>
 
+        <!-- Submission details -->
+        <div *ngIf="tempAssignment.isSubmitted">
+          <!-- Show submission date -->
+          <div class="row">
+            {{ "notation.dateSoumission" | translate }} :
+            {{ tempAssignment.submittedAt | date }}
+          </div>
+
+          <!-- Show student remarks -->
+          <div class="row">
+            {{ "notation.remarqueEleve" | translate }} :
+            {{ tempAssignment.remarks }}
+          </div>
+        </div>
+
+        <!-- If the assignment is not yet submitted -->
+        <div *ngIf="!tempAssignment.isSubmitted" class="row">
+          {{ "assignment.notSubmitYet" | translate }}.
+        </div>
+
+        <!-- Professor remarks and grading -->
+        <div *ngIf="isProfessor">
+          <mat-form-field class="field">
+            <mat-label class="label">{{
+              "notation.remarqueProf" | translate
+            }}</mat-label>
+            <textarea
+              [(ngModel)]="tempAssignment.remarks"
+              [disabled]="!isEditMode || !isGrading"
+              [ngModelOptions]="{ standalone: true }"
+              class="input"
+              matInput
+              name="professorRemarks"
+            ></textarea>
+          </mat-form-field>
+
+          <mat-form-field class="field">
+            <mat-label class="label">{{
+              "student.grade" | translate
+            }}</mat-label>
+            <input
+              (keypress)="numberOnly($event)"
+              [(ngModel)]="tempAssignment.grade"
+              [disabled]="!isEditMode || !isGrading"
+              [ngModelOptions]="{ standalone: true }"
+              matInput
+              min="0"
+              placeholder="Entrer la note de l'élève"
+              step="any"
+              type="number"
+            />
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-dialog-content>
+  </mat-tab>
+</mat-tab-group>
 <mat-dialog-actions class="dialog-actions">
   <button
     (click)="toggleEditMode()"
     *ngIf="isProfessor && !isEditMode"
-    color="primary" mat-raised-button
+    color="primary"
+    mat-raised-button
   >
     {{ "button.edit" | translate }}
   </button>
   <button
     (click)="saveChanges()"
     *ngIf="isProfessor && isEditMode"
-    color="primary" mat-raised-button
+    color="primary"
+    mat-raised-button
   >
     {{ "button.save" | translate }}
   </button>
   <button
     (click)="toggleEditMode()"
     *ngIf="isProfessor && isEditMode"
-    color="accent" mat-raised-button
+    color="accent"
+    mat-raised-button
   >
     {{ "button.cancel" | translate }}
   </button>
   <button
     (click)="deleteAssignment()"
     *ngIf="isProfessor && isEditMode"
-    color="warn" mat-raised-button
-  >
-    {{ "button.delete" | translate}}
-  </button>
-  <button
-    mat-dialog-close
+    color="warn"
     mat-raised-button
   >
+    {{ "button.delete" | translate }}
+  </button>
+  <button mat-dialog-close mat-raised-button>
     {{ "button.close" | translate }}
   </button>
 </mat-dialog-actions>

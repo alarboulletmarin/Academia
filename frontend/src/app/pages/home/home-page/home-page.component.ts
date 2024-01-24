@@ -66,7 +66,10 @@ export class HomePageComponent implements OnInit {
     const dialogRef = this.dialog.open(AssignmentDialogComponent, {
       width: '800px',
       height: '800px',
-      data: assignment,
+      data: {
+        assignment: assignment,
+        isGrading: false,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

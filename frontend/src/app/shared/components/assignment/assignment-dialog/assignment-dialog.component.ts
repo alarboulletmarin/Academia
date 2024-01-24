@@ -21,6 +21,7 @@ export class AssignmentDialogComponent implements OnInit {
   public isProfessor: boolean = false;
   public isEditMode: boolean = false;
   public tempAssignment!: Assignment;
+  public isGrading: boolean = false;
 
   public subjects: Subject[] = [];
   public professors: Professor[] = [];
@@ -28,7 +29,8 @@ export class AssignmentDialogComponent implements OnInit {
   public selectedGroups: { [key: string]: boolean } = {};
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Assignment,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public isGrade: boolean,
     private dialogRef: MatDialogRef<AssignmentDialogComponent>,
     private authService: AuthService,
     private assignmentService: AssignmentService,
@@ -40,7 +42,9 @@ export class AssignmentDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.isProfessor = this.authService.hasRole('professor');
-    this.tempAssignment = { ...this.data };
+    this.isGrading = this.data.isGrading;
+    this.tempAssignment = { ...this.data.assignment };
+    console.log(this.tempAssignment);
 
     this.subjectService.getSubjects().subscribe((subjects) => {
       this.subjects = subjects;
@@ -60,7 +64,7 @@ export class AssignmentDialogComponent implements OnInit {
 
   toggleEditMode() {
     if (!this.isEditMode) {
-      this.tempAssignment = { ...this.data };
+      this.tempAssignment = { ...this.data.assignment };
     }
     this.isEditMode = !this.isEditMode;
   }
@@ -70,7 +74,7 @@ export class AssignmentDialogComponent implements OnInit {
       this.tempAssignment.group = this.groups.filter(
         (group) => this.selectedGroups[group._id],
       );
-      this.data = { ...this.tempAssignment };
+      this.data.assignment = { ...this.tempAssignment };
       this.editAssignment();
       this.toggleEditMode();
     }
@@ -98,7 +102,7 @@ export class AssignmentDialogComponent implements OnInit {
 
   deleteAssignment() {
     this.assignmentService
-      .deleteAssignment(this.data)
+      .deleteAssignment(this.data.assignment)
       .pipe(
         catchError((err) => {
           this.showNotification(
@@ -114,5 +118,14 @@ export class AssignmentDialogComponent implements OnInit {
 
   showNotification(message: string) {
     this.snackBar.open(message, 'OK', { duration: 3000 });
+  }
+
+  numberOnly(event: KeyboardEvent): void {
+    const pattern = /[0-9\.-]/;
+    const inputChar = event.key;
+
+    if (!pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
 }

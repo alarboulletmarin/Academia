@@ -10,7 +10,6 @@ import studentRoutes from "./src/api/studentRoutes.js";
 import subjectRoutes from "./src/api/subjectRoutes.js";
 import professorRoutes from "./src/api/professorRoutes.js";
 import promotionRoutes from "./src/api/promotionRoutes.js";
-import submissionRoutes from "./src/api/submissionRoutes.js";
 import { errorHandler } from "./src/core/middlewares/errorHandler.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -58,7 +57,6 @@ const setupExpress = (app, port) => {
   app.use("/api/professors", professorRoutes);
   app.use("/api/promotions", promotionRoutes);
   app.use("/api/users", userRoutes);
-  app.use("/api/submissions", submissionRoutes);
   app.use(errorHandler);
   app.listen(port, () => {
     console.log(`Server is running : http://localhost:${port}`);
