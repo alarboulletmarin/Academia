@@ -8,7 +8,10 @@
   },
   "label": {
     "home": "Startseite",
-    "about": "Über"
+    "about": "Über",
+    "action": "Aktion",
+    "infoAssignment": "Informationen zur Aufgabe"
+
   },
   "button": {
     "back": "Zurück",
@@ -44,7 +47,9 @@
     "subject": "Fach",
     "teacher": "Lehrer",
     "dueDate": "Abgabedatum",
-    "group": "Gruppe"
+    "group": "Gruppe",
+    "submit" : "Eingereicht bei",
+    "notSubmitYet": "Aufgabe Noch Nicht Eingereicht"
   },
   "add": {
     "title": "Titel",
@@ -70,7 +75,7 @@
     "login": "Anmelden",
     "logout": "Abmelden",
     "username": "Benutzername",
-    "email": "E-Mail-Adresse",
+    "email": "email",
     "password": "Passwort",
     "error": "Anmeldefehler"
   },
@@ -88,5 +93,20 @@
   "user": {
     "list": "Benutzerliste",
     "role": "Rolle"
+  },
+  "student": {
+    "type": "Schüler",
+    "grade": "Note"
+  },
+
+  "notation": {
+    "dateSoumission": "Abgabedatum",
+    "remarqueEleve": "Anmerkungen des Schülers",
+    "remarqueProf": "Anmerkungen des Lehrers"
+  },
+
+  "tab": {
+    "assignments": "Informationen zur Aufgabe",
+    "grading": "Die Aufgabe bewerten"
   }
 }
