@@ -3,9 +3,90 @@
     "de": "Alemán",
     "en": "Inglés",
     "fr": "Francés",
-    "it": "Italiano"
+    "it": "Italiano",
+    "es": "Español"
   },
   "label": {
-    "home": "Casa"
+    "home": "Inicio",
+    "about": "Acerca de"
+  },
+  "button": {
+    "back": "Regresar",
+    "next": "Siguiente",
+    "finish": "Finalizar",
+    "generate": "Generar Tareas",
+    "modify": "Modificar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "add": "Añadir",
+    "edit": "Editar",
+    "close": "Cerrar"
+  },
+  "title": {
+    "addAssignment": "Añadir una Tarea",
+    "listAssignments": "Lista de Tareas",
+    "manageUser": "Gestionar Usuarios",
+    "noter": "Calificar una Tarea",
+    "testDev": "Datos de Prueba (Dev)",
+    "myGrades": "Mis Notas",
+    "ressources": "Recursos",
+    "myCalendar": "Mi Calendario",
+    "calendar": "Calendario de Tareas",
+    "settings": "Configuraciones"
+  },
+  "assignment": {
+    "type": "Tarea",
+    "title": "Título",
+    "description": "Descripción",
+    "dateLimit": "Fecha Límite",
+    "duration": "Duración",
+    "subject": "Materia",
+    "teacher": "Profesor",
+    "dueDate": "Fecha de Entrega",
+    "group": "Grupo"
+  },
+  "add": {
+    "title": "Título",
+    "description": "Descripción",
+    "dateLimit": "Fecha Límite",
+    "duration": "Duración",
+    "subject": "Materia",
+    "teacher": "Profesor",
+    "group": "Grupo",
+    "step1": "Paso 1: Información Básica",
+    "step2": "Paso 2: Información Adicional",
+    "step3": "Paso 3: Resumen",
+    "summary": "Resumen"
+  },
+  "generate": {
+    "title": "Seleccionar el Número de Tareas",
+    "number": "Número de Tareas"
+  },
+  "textInput": {
+    "search": "Buscar"
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión",
+    "username": "Nombre de Usuario",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "error": "Error de Inicio de Sesión"
+  },
+  "home": {
+    "welcome": "¡Bienvenido a Academia!",
+    "description": "Esta aplicación ayuda a gestionar las tareas de los estudiantes de una escuela.",
+    "dailyAssignment": "Tareas de Hoy",
+    "noAssignment": "No hay Tareas para Hoy",
+    "due": "Debido el",
+    "groups": "Grupo(s)",
+    "subject": "Tema",
+    "details": "Ver Detalles",
+    "allAssignments": "Ver Todas las Tareas"
+  },
+  "user": {
+    "list": "Lista de Usuarios",
+    "role": "Rol"
   }
 }

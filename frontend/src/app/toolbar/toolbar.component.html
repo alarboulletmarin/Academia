@@ -10,7 +10,7 @@
 
   <a class="nav-link mr-4" routerLink="/calendar">
     <mat-icon class="mr-1">calendar_today</mat-icon>
-    Mon Calendrier
+    {{ "title.myCalendar" | translate }}
   </a>
 
   <span class="flex-spacer"></span>
@@ -24,11 +24,11 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item>
       <mat-icon>settings</mat-icon>
-      Paramètres
+      {{ "title.settings" | translate }}
     </button>
     <button (click)="logout()" mat-menu-item>
       <mat-icon>exit_to_app</mat-icon>
-      Déconnexion
+      {{  "auth.logout" | translate }}
     </button>
   </mat-menu>
 

@@ -1,15 +1,15 @@
 <mat-card>
-  <mat-card-title>Liste des devoirs</mat-card-title>
+  <mat-card-title>{{ "title.listAssignment" | translate }}</mat-card-title>
   <mat-card-content>
     <!-- search box for filtering assignments -->
     <mat-form-field>
-      <mat-label>Chercher</mat-label>
+      <mat-label>{{ "textInput.search" | translate }}</mat-label>
       <input (keyup)="applyFilter($event)" matInput placeholder="Ex. Titre" />
     </mat-form-field>
 
     <!-- filter by subject -->
     <mat-form-field>
-      <mat-label>Matière</mat-label>
+      <mat-label>{{ "assignment.subject" | translate }}</mat-label>
       <mat-select
         (selectionChange)="loadAssignments()"
         [(value)]="currentSubject"
@@ -29,7 +29,7 @@
 
     <!-- filter by professor -->
     <mat-form-field>
-      <mat-label>Professeur</mat-label>
+      <mat-label>{{ "assignment.teacher" | translate }}</mat-label>
       <mat-select
         (selectionChange)="loadAssignments()"
         [(value)]="currentProfessor"
@@ -58,14 +58,14 @@
     >
       <!-- Title Column -->
       <ng-container matColumnDef="title">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header="title">Titre</th>
+        <th *matHeaderCellDef mat-header-cell mat-sort-header="title">{{"assignment.title" | translate }}</th>
         <td *matCellDef="let assignment" mat-cell>{{ assignment.title }}</td>
       </ng-container>
 
       <!-- Description Column -->
       <ng-container matColumnDef="description">
         <th *matHeaderCellDef mat-header-cell mat-sort-header="description">
-          Description
+          {{ "assignment.description" | translate }}
         </th>
         <td *matCellDef="let assignment" mat-cell>
           {{ assignment.description }}
@@ -75,7 +75,7 @@
       <!-- Professor Column -->
       <ng-container matColumnDef="professor">
         <th *matHeaderCellDef mat-header-cell mat-sort-header="professor">
-          Professeur
+          {{ "assignment.teacher" | translate }}
         </th>
         <td *matCellDef="let assignment" mat-cell>
           {{ assignment.professor.firstName }}
@@ -86,7 +86,7 @@
       <!-- Group Column -->
       <ng-container matColumnDef="group">
         <th *matHeaderCellDef mat-header-cell mat-sort-header="group">
-          Groupe
+          {{ "assignment.group" | translate }}
         </th>
 
         <td *matCellDef="let assignment" mat-cell>
@@ -99,7 +99,7 @@
       <!-- Due Date Column -->
       <ng-container matColumnDef="dueDate">
         <th *matHeaderCellDef mat-header-cell mat-sort-header="dueDate">
-          Date d'échéance
+          {{ "assignment.dueDate" | translate }}
         </th>
         <td *matCellDef="let assignment" mat-cell>
           {{ assignment.dueDate | date: "dd/MM/yyyy" }}

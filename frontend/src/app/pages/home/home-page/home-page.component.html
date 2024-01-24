@@ -1,8 +1,8 @@
 <div class="home-container">
   <div class="welcome-section">
-    <h1>Bienvenue sur Academia</h1>
-    <p>Academia est une plateforme de gestion de devoirs pour les écoles</p>
-    <h2>Devoirs d'aujourd'hui: {{ assignmentsOfTheDay.length }} au total</h2>
+    <h1>{{ "home.welcome" | translate }}</h1>
+    <p>{{ "home.description" | translate }}</p>
+    <h2>{{ "home.dailyAssignment" |translate }} : {{ assignmentsOfTheDay.length }}</h2>
 
     <div class="assignments-grid">
       <mat-card
@@ -11,13 +11,13 @@
       >
         <mat-card-title>{{ assignment.title }}</mat-card-title>
         <mat-card-subtitle
-          >Dû le {{ assignment.dueDate | date: "short" }}</mat-card-subtitle
+          >{{"home.due" | translate}} {{ assignment.dueDate | date: "short" }}</mat-card-subtitle
         >
         <mat-card-content>
           <p>{{ assignment.description }}</p>
-          <p>Sujet: {{ assignment.subject.name }}</p>
+          <p>{{"home.subject" | translate}}: {{ assignment.subject.name }}</p>
           <p>
-            Groupe(s):
+            {{ "home.groups" | translate }} :
             <span *ngFor="let group of assignment.group; let isLast = last">
               {{ group.name }}<span *ngIf="!isLast">, </span>
             </span>
@@ -25,13 +25,13 @@
         </mat-card-content>
         <mat-card-actions>
           <button (click)="openAssignmentDialog(assignment)" mat-button>
-            Voir le Détail
+            {{ "home.details" | translate }}
           </button>
         </mat-card-actions>
       </mat-card>
     </div>
     <button [routerLink]="['/assignments']" color="primary" mat-raised-button>
-      Voir tous les devoirs
+      {{ "home.allAssignments" | translate }}
     </button>
   </div>
 </div>
