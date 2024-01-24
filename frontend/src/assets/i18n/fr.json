@@ -8,7 +8,9 @@
   },
   "label": {
     "home": "Accueil",
-    "about": "À propos"
+    "about": "À propos",
+    "action": "Action",
+    "infoAssignment" : "Informations du devoir"
   },
   "button":{
     "back": "Retour",
@@ -45,7 +47,9 @@
     "subject": "Matière",
     "teacher": "Professeur",
     "dueDate": "Date de remise",
-    "group": "Groupe"
+    "group": "Groupe",
+    "submit" : "Soumis à",
+    "notSubmitYet": "Devoir pas encore soumis"
   },
 
   "add":{
@@ -75,7 +79,7 @@
     "login": "Connexion",
     "logout": "Déconnexion",
     "username": "Nom d'utilisateur",
-    "email": "Adresse électronique",
+    "email": "Courrier électronique ",
     "password": "Mot de passe",
     "error": "Erreur de connexion"
   },
@@ -94,5 +98,19 @@
   "user":{
     "list": "Liste des utilisateurs",
     "role": "Rôle"
+  },
+  "student": {
+    "type": "Elève",
+    "grade": "Note"
+  },
+
+  "notation": {
+    "dateSoumission": "Date de soumission",
+    "remarqueEleve" : "Remarques de l'élève",
+    "remarqueProf" : "Remarques de l'enseignant"
+  },
+  "tab": {
+    "assignments": "Informations du devoir",
+    "grading": "Noter le devoir"
   }
 }

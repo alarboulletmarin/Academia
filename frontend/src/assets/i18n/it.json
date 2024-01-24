@@ -8,7 +8,10 @@
   },
   "label": {
     "home": "accoglienza",
-    "about": "Informazioni"
+    "about": "Informazioni",
+    "action": "Azione",
+    "infoAssignment": "Informazioni sul Compito"
+
   },
   "button": {
     "back": "Indietro",
@@ -44,7 +47,9 @@
     "subject": "Materia",
     "teacher": "Professore",
     "dueDate": "Data di Consegna",
-    "group": "Gruppo"
+    "group": "Gruppo",
+    "submit" : "Inviato a",
+    "notSubmitYet": "Compito Non Ancora Inviato"
   },
   "add": {
     "title": "Titolo",
@@ -70,7 +75,7 @@
     "login": "Accesso",
     "logout": "Disconnessione",
     "username": "Nome Utente",
-    "email": "Indirizzo Email",
+    "email": "Email",
     "password": "Password",
     "error": "Errore di Accesso"
   },
@@ -88,5 +93,20 @@
   "user": {
     "list": "Elenco Utenti",
     "role": "Ruolo"
+  },
+  "student": {
+    "type": "Studente",
+    "grade": "Voto"
+  },
+
+  "notation": {
+    "dateSoumission": "Data di Invio",
+    "remarqueEleve": "Osservazioni dello Studente",
+    "remarqueProf": "Osservazioni dell'Insegnante"
+  },
+
+  "tab": {
+    "assignments": "Informazioni sul Compito",
+    "grading": "Valutare il Compito"
   }
 }

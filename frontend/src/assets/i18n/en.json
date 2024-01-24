@@ -8,7 +8,10 @@
   },
   "label": {
     "home": "Home",
-    "about": "About"
+    "about": "About",
+    "action" : "Action",
+    "infoAssignment": "Assignment Information"
+
   },
   "button": {
     "back": "Back",
@@ -44,7 +47,9 @@
     "subject": "Subject",
     "teacher": "Teacher",
     "dueDate": "Due Date",
-    "group": "Group"
+    "group": "Group",
+    "submit" : "Submitted at",
+    "notSubmitYet": "Assignment Not Yet Submitted"
   },
   "add": {
     "title": "Title",
@@ -70,7 +75,7 @@
     "login": "Login",
     "logout": "Logout",
     "username": "Username",
-    "email": "Email Address",
+    "email": "Email",
     "password": "Password",
     "error": "Login Error"
   },
@@ -88,5 +93,20 @@
   "user": {
     "list": "List of Users",
     "role": "Role"
+  },
+  "student": {
+    "type": "Student",
+    "grade": "Grade"
+  },
+
+  "notation": {
+    "dateSoumission": "Submission Date",
+    "remarqueEleve": "Student's Remarks",
+    "remarqueProf": "Teacher's Remarks"
+  },
+
+  "tab": {
+    "assignments": "Assignment Information",
+    "grading": "Grade the Assignment"
   }
 }

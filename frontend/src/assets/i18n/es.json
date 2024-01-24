@@ -8,7 +8,10 @@
   },
   "label": {
     "home": "Inicio",
-    "about": "Acerca de"
+    "about": "Acerca de",
+    "action": "Acción",
+    "infoAssignment": "Información de la Tarea"
+
   },
   "button": {
     "back": "Regresar",
@@ -44,7 +47,9 @@
     "subject": "Materia",
     "teacher": "Profesor",
     "dueDate": "Fecha de Entrega",
-    "group": "Grupo"
+    "group": "Grupo",
+    "submit" : "Presentado en",
+    "notSubmitYet": "Tarea Aún No Enviada"
   },
   "add": {
     "title": "Título",
@@ -88,5 +93,20 @@
   "user": {
     "list": "Lista de Usuarios",
     "role": "Rol"
+  },
+  "student": {
+    "type": "Estudiante",
+    "grade": "Calificación"
+  },
+
+  "notation": {
+    "dateSoumission": "Fecha de Envío",
+    "remarqueEleve": "Comentarios del Estudiante",
+    "remarqueProf": "Comentarios del Profesor"
+  },
+
+  "tab": {
+    "assignments": "Información de la Tarea",
+    "grading": "Calificar la Tarea"
   }
 }
