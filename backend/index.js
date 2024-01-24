@@ -12,6 +12,7 @@ import professorRoutes from "./src/api/professorRoutes.js";
 import promotionRoutes from "./src/api/promotionRoutes.js";
 import { errorHandler } from "./src/core/middlewares/errorHandler.js";
 import { fileURLToPath } from "url";
+import * as path from "path";
 import { dirname } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -70,12 +71,12 @@ const app = express();
 app.use(express.json());
 
 // // Configures the Express application to serve static files from the frontend
-// app.use(express.static(path.join(__dirname, "./src/dist/frontend")));
-//
+app.use(express.static(path.join(__dirname, "./src/dist/frontend")));
+
 // // Configures the Express application to serve the frontend
-// app.get("/", (req, res) =>
-//   res.sendFile(path.join(__dirname, "./src/dist/frontend/index.html ")),
-// );
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "./src/dist/frontend/index.html ")),
+);
 
 setupCORS(app, config.security.cors.allowedOrigins);
 setupDatabase(config);

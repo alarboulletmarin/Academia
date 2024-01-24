@@ -3,9 +3,110 @@
     "de": "Tedesco",
     "en": "Inglese",
     "fr": "Francese",
-    "it": "Italiano"
+    "it": "Italiano",
+    "es": "Spagnolo"
   },
   "label": {
-    "home": "Casa"
+    "home": "accoglienza",
+    "about": "Informazioni",
+    "action": "Azione",
+    "infoAssignment": "Informazioni sul Compito"
+
+  },
+  "button": {
+    "back": "Indietro",
+    "next": "Successivo",
+    "finish": "Termina",
+    "generate": "Genera Compiti",
+    "modify": "Modifica",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "add": "Aggiungi",
+    "edit": "Modifica",
+    "close": "Chiudi"
+  },
+  "title": {
+    "addAssignment": "Aggiungi un Compito",
+    "listAssignments": "Elenco dei Compiti",
+    "manageUser": "Gestisci Utenti",
+    "noter": "Valuta un Compito",
+    "testDev": "Dati di Test (Dev)",
+    "myGrades": "Le Mie Note",
+    "ressources": "Risorse",
+    "myCalendar": "Il Mio Calendario",
+    "calendar": "Calendario dei Compiti",
+    "settings": "Impostazioni"
+  },
+  "assignment": {
+    "type": "Compito",
+    "title": "Titolo",
+    "description": "Descrizione",
+    "dateLimit": "Scadenza",
+    "duration": "Durata",
+    "subject": "Materia",
+    "teacher": "Professore",
+    "dueDate": "Data di Consegna",
+    "group": "Gruppo",
+    "submit" : "Inviato a",
+    "notSubmitYet": "Compito Non Ancora Inviato"
+  },
+  "add": {
+    "title": "Titolo",
+    "description": "Descrizione",
+    "dateLimit": "Scadenza",
+    "duration": "Durata",
+    "subject": "Materia",
+    "teacher": "Professore",
+    "group": "Gruppo",
+    "step1": "Fase 1: Informazioni Base",
+    "step2": "Fase 2: Informazioni Aggiuntive",
+    "step3": "Fase 3: Riepilogo",
+    "summary": "Riepilogo"
+  },
+  "generate": {
+    "title": "Seleziona il Numero di Compiti",
+    "number": "Numero di Compiti"
+  },
+  "textInput": {
+    "search": "Cerca"
+  },
+  "auth": {
+    "login": "Accesso",
+    "logout": "Disconnessione",
+    "username": "Nome Utente",
+    "email": "Email",
+    "password": "Password",
+    "error": "Errore di Accesso"
+  },
+  "home": {
+    "welcome": "Benvenuto in Academia!",
+    "description": "Questa applicazione aiuta a gestire i compiti degli studenti di una scuola.",
+    "dailyAssignment": "Compiti di Oggi",
+    "noAssignment": "Nessun Compito per Oggi",
+    "due": "Dovuto il",
+    "groups": "Gruppo(i)",
+    "subject": "Argomento",
+    "details": "Vedi Dettagli",
+    "allAssignments": "Vedi Tutti i Compiti"
+  },
+  "user": {
+    "list": "Elenco Utenti",
+    "role": "Ruolo"
+  },
+  "student": {
+    "type": "Studente",
+    "grade": "Voto"
+  },
+
+  "notation": {
+    "dateSoumission": "Data di Invio",
+    "remarqueEleve": "Osservazioni dello Studente",
+    "remarqueProf": "Osservazioni dell'Insegnante"
+  },
+
+  "tab": {
+    "assignments": "Informazioni sul Compito",
+    "grading": "Valutare il Compito"
   }
 }

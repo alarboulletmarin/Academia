@@ -8,13 +8,16 @@ import { Promotion } from '../../models/promotion.model';
   providedIn: 'root',
 })
 export class PromotionService {
-  private apiUrl = 'http://localhost:1000/api/promotions';
+  private apiUrl = '/api/promotions';
   private readonly headers = new HttpHeaders();
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+  ) {
     this.headers = new HttpHeaders().set(
       'x-auth-token',
-      this.authService.getJwtToken() || ''
+      this.authService.getJwtToken() || '',
     );
   }
 

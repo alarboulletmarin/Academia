@@ -8,13 +8,16 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root',
 })
 export class GroupService {
-  private apiUrl = 'http://localhost:1000/api/groups';
+  private apiUrl = '/api/groups';
   private readonly headers = new HttpHeaders();
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+  ) {
     this.headers = new HttpHeaders().set(
       'x-auth-token',
-      this.authService.getJwtToken() || ''
+      this.authService.getJwtToken() || '',
     );
   }
 
