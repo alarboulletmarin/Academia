@@ -2,8 +2,8 @@ import Assignment from "../models/Assignment.js";
 import Subject from "../models/Subject.js";
 import Professor from "../models/Professor.js";
 import Group from "../models/Group.js";
-import Submission from "../models/Submission.js";
 import mongoose from "mongoose";
+import Student from "../models/Student.js";
 
 /**
  * Creates a new assignment.
@@ -17,11 +17,35 @@ export async function createAssignment(req, res) {
     // Start transaction
     session = await mongoose.startSession();
     session.startTransaction();
-    const createdAssignment = await saveAssignment(req.body, session);
-    await createSubmissions(createdAssignment, session);
+
+    const group = await Group.findById(req.body.group)
+      .populate("students")
+      .lean()
+      .exec();
+
+    if (!group || group.students.length === 0) {
+      console.error("Unable to find students in the given group");
+      throw new Error("No students found in the given group.");
+    }
+
+    const assignments = [];
+
+    for (const student of group.students) {
+      const newAssignmentData = {
+        ...req.body,
+        group: group._id,
+        student: student._id,
+      };
+
+      const newAssignment = new Assignment(newAssignmentData);
+      await newAssignment.save({ session });
+
+      assignments.push(newAssignment);
+    }
+
     await session.commitTransaction();
 
-    res.status(201).json(createdAssignment);
+    res.status(201).json(assignments);
   } catch (error) {
     console.error("Error saving assignment:", error);
     if (session) await session.abortTransaction();
@@ -32,22 +56,25 @@ export async function createAssignment(req, res) {
 }
 
 async function saveAssignment(assignmentData, session) {
-  return await new Assignment(assignmentData).save({ session });
-}
+  const group = await Group.findById(assignmentData.group)
+    .populate("student")
+    .lean()
+    .exec();
 
-async function createSubmissions(createdAssignment, session) {
-  const group = await Group.findById(createdAssignment.group).session(session);
-  if (!group) throw new Error("Group not found");
+  if (!group || group.students.length === 0) {
+    console.error("Unable to find students in the given group");
+    throw Error("No students found in the given group.");
+  }
 
-  const submissionDocs = group.students.map((studentId) => ({
-    student: studentId,
-    assignment: createdAssignment._id,
-    isSubmitted: false,
-    grade: null,
-    remarks: "",
-  }));
+  const assignmentPromises = group.students.map((student) =>
+    new Assignment({
+      ...assignmentData,
+      group: group._id,
+      student: student._id,
+    }).save({ session }),
+  );
 
-  await Submission.insertMany(submissionDocs, { session });
+  return await Promise.all(assignmentPromises);
 }
 
 /**
@@ -131,6 +158,28 @@ export async function getAssignments(req, res) {
       }
     }
 
+    let groupId = req.query.group;
+
+    if (groupId) {
+      let groupDoc = await Group.findById(groupId);
+      if (groupDoc) {
+        filterOptions.group = groupDoc._id;
+      } else {
+        return res.status(404).json({ message: "Group not found" });
+      }
+    }
+
+    let studentId = req.query.student;
+
+    if (studentId) {
+      let studentDoc = await Student.findById(studentId);
+      if (studentDoc) {
+        filterOptions.student = studentDoc._id;
+      } else {
+        return res.status(404).json({ message: "Student not found" });
+      }
+    }
+
     let dueDate = req.query.dueDate;
     if (dueDate) {
       let dueDateObj = new Date(dueDate);
@@ -157,6 +206,7 @@ export async function getAssignments(req, res) {
       .populate("subject")
       .populate("professor")
       .populate("group")
+      .populate("student")
       .sort(sortOptions);
 
     if (paginateCondition) {
@@ -242,11 +292,18 @@ export async function deleteAssignment(req, res) {
 export async function generateAssignments(req, res) {
   const numAssignments = req.body.numAssignments;
 
+  // We will keep students as well now because we need to add a student in each assignment as per new schema
   const subjects = await Subject.find();
   const groups = await Group.find();
   const professors = await Professor.find();
+  const students = await Student.find();
 
-  if (subjects.length === 0 || groups.length === 0 || professors.length === 0) {
+  if (
+    subjects.length === 0 ||
+    groups.length === 0 ||
+    professors.length === 0 ||
+    students.length === 0
+  ) {
     console.error(
       `Error creating assignments: No sufficient data to generate assignments`,
     );
@@ -268,13 +325,16 @@ export async function generateAssignments(req, res) {
         subject: subjects[getRandomInt(subjects.length)]._id,
         group: groups[getRandomInt(groups.length)]._id,
         professor: professors[getRandomInt(professors.length)]._id,
+        student: students[getRandomInt(students.length)]._id,
+        isSubmitted: false,
+        remarks: `Remarques pour le devoir ${i + 1}`,
+        grade: null,
+        submittedAt: null,
       };
-      // Save assignments with session
-      const createdAssignment = await new Assignment(assignment).save({
+
+      await new Assignment(assignment).save({
         session,
       });
-      // Create submissions for the current assignment
-      await createSubmissions(createdAssignment, session);
     }
 
     await session.commitTransaction();
@@ -286,10 +346,9 @@ export async function generateAssignments(req, res) {
     await session.abortTransaction();
     res.status(500).json({ message: "Error creating assignments" });
   } finally {
-    session.endSession();
+    await session.endSession();
   }
 }
-
 function getRandomDate(start, end) {
   return new Date(
     start.getTime() + Math.random() * (end.getTime() - start.getTime()),

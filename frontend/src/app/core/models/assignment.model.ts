@@ -1,7 +1,7 @@
 import { Professor } from './professor.model';
 import { Group } from './group.model';
 import { Subject } from './subject.model';
-import { AssignmentAttachment } from './attachment.model';
+import { Student } from './student.model';
 
 export interface Assignment {
   _id?: string;
@@ -9,9 +9,15 @@ export interface Assignment {
   description: string;
   dueDate: Date; // required
   subject: Subject;
-  attachment: AssignmentAttachment; // filePath
   professor: Professor;
   group: Group[];
   createdAt?: Date;
   updatedAt?: Date;
+
+  // Submission fields
+  student?: Student;
+  submittedAt?: Date;
+  isSubmitted?: Boolean;
+  grade?: number;
+  remarks?: string;
 }

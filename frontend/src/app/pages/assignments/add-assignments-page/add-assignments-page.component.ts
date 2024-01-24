@@ -94,7 +94,6 @@ export class AddAssignmentsPageComponent implements OnInit {
         subject: this.secondFormGroup.value.subject,
         professor: this.secondFormGroup.value.professor,
         group: this.secondFormGroup.value.group,
-        attachment: this.thirdFormGroup.value.attachmentValue,
       };
       this.redirectToHome();
       this.assignmentService.addAssignment(newAssignment).subscribe({

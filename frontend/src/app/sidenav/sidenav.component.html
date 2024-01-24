@@ -23,7 +23,7 @@
       <!-- Liens communs à tous les utilisateurs -->
       <a mat-list-item routerLink="/assignments">
         <mat-icon>list</mat-icon>
-        {{"title.listAssignments" | translate}}
+        {{ "title.listAssignments" | translate }}
       </a>
 
       <!-- Liens spécifiques pour les professeurs -->
@@ -31,6 +31,10 @@
         <a mat-list-item routerLink="/assignments/add">
           <mat-icon>add</mat-icon>
           {{ "title.addAssignment" | translate }}
+        </a>
+        <a mat-list-item routerLink="/assignments/grade">
+          <mat-icon>grade</mat-icon>
+          {{ "title.noter" | translate }}
         </a>
         <a mat-list-item routerLink="/users">
           <mat-icon>people</mat-icon>
