@@ -36,7 +36,8 @@
     "ressources": "Risorse",
     "myCalendar": "Il Mio Calendario",
     "calendar": "Calendario dei Compiti",
-    "settings": "Impostazioni"
+    "settings": "Impostazioni",
+    "myAssignments": "I miei compiti"
   },
   "assignment": {
     "type": "Compito",
@@ -49,7 +50,8 @@
     "dueDate": "Data di Consegna",
     "group": "Gruppo",
     "submit" : "Inviato a",
-    "notSubmitYet": "Compito Non Ancora Inviato"
+    "notSubmitYet": "Compito Non Ancora Inviato",
+    "isSubmitted": "Incarico inviato"
   },
   "add": {
     "title": "Titolo",
@@ -96,9 +98,16 @@
   },
   "student": {
     "type": "Studente",
-    "grade": "Voto"
+    "grade": "Voto",
+    "submit": "Invia",
+    "check": "Verifica"
   },
-
+  "professor": {
+    "type": "Professore"
+  },
+  "subject": {
+    "subject": "Argomento"
+  },
   "notation": {
     "dateSoumission": "Data di Invio",
     "remarqueEleve": "Osservazioni dello Studente",

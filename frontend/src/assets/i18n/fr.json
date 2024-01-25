@@ -35,7 +35,8 @@
     "ressources": "Ressources",
     "myCalendar": "Mon calendrier",
     "calendar": "Calendrier des devoirs",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "myAssignments": "Mes devoirs"
   },
 
   "assignment":{
@@ -49,7 +50,8 @@
     "dueDate": "Date de remise",
     "group": "Groupe",
     "submit" : "Soumis à",
-    "notSubmitYet": "Devoir pas encore soumis"
+    "notSubmitYet": "Devoir pas encore soumis",
+    "isSubmitted": "Devoir soumis"
   },
 
   "add":{
@@ -102,9 +104,16 @@
   },
   "student": {
     "type": "Elève",
-    "grade": "Note"
+    "grade": "Note",
+    "submit": "Soumettre",
+    "check": "Vérifier"
   },
-
+  "professor": {
+    "type": "Professeur"
+  },
+  "subject": {
+    "subject": "Sujet"
+  },
   "notation": {
     "dateSoumission": "Date de soumission",
     "remarqueEleve" : "Remarques de l'élève",

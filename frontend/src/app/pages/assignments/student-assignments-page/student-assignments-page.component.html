@@ -43,8 +43,8 @@
       "assignment.submit" | translate
     }}</mat-header-cell>
     <mat-cell *matCellDef="let assignment">
-      <mat-icon *ngIf="assignment.submittedAt">check</mat-icon>
-      <mat-icon *ngIf="!assignment.submittedAt">close</mat-icon>
+      <mat-icon *ngIf="assignment.isSubmitted">check</mat-icon>
+      <mat-icon *ngIf="!assignment.isSubmitted">close</mat-icon>
     </mat-cell>
   </ng-container>
 
