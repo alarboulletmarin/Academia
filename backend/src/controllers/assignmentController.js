@@ -55,28 +55,6 @@ export async function createAssignment(req, res) {
   }
 }
 
-async function saveAssignment(assignmentData, session) {
-  const group = await Group.findById(assignmentData.group)
-    .populate("student")
-    .lean()
-    .exec();
-
-  if (!group || group.students.length === 0) {
-    console.error("Unable to find students in the given group");
-    throw Error("No students found in the given group.");
-  }
-
-  const assignmentPromises = group.students.map((student) =>
-    new Assignment({
-      ...assignmentData,
-      group: group._id,
-      student: student._id,
-    }).save({ session }),
-  );
-
-  return await Promise.all(assignmentPromises);
-}
-
 /**
  * Retrieves an assignment by ID.
  * @async

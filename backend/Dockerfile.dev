@@ -14,7 +14,7 @@ RUN npm install
 EXPOSE 1000
 
 # Définition de la variable d'environnement NODE_ENV
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 
 # Commande pour démarrer l'application
 CMD ["node", "index.js"]

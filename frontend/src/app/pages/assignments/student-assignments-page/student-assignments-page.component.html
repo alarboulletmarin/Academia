@@ -1,0 +1,99 @@
+<mat-table [dataSource]="assignments" matSort>
+  <!-- Student Column -->
+  <ng-container matColumnDef="professor">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+      "professor.type" | translate
+    }}</mat-header-cell>
+    <mat-cell *matCellDef="let assignment">{{
+      assignment.professor.firstName + " " + assignment.professor.lastName
+    }}</mat-cell>
+  </ng-container>
+
+  <!--  Subject Column  -->
+  <ng-container matColumnDef="subject">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+      "subject.subject" | translate
+    }}</mat-header-cell>
+    <mat-cell *matCellDef="let assignment">{{
+      assignment.subject.name
+    }}</mat-cell>
+  </ng-container>
+
+  <!-- Assignment Column -->
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+      "assignment.title" | translate
+    }}</mat-header-cell>
+    <mat-cell *matCellDef="let assignment">{{ assignment.title }}</mat-cell>
+  </ng-container>
+
+  <!-- Due Date Column -->
+  <ng-container matColumnDef="dueDate">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+      "assignment.dueDate" | translate
+    }}</mat-header-cell>
+    <mat-cell *matCellDef="let assignment">{{
+      assignment.dueDate | date
+    }}</mat-cell>
+  </ng-container>
+
+  <!-- Submitted At Column -->
+  <ng-container matColumnDef="submittedAt">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+      "assignment.submit" | translate
+    }}</mat-header-cell>
+    <mat-cell *matCellDef="let assignment">
+      <mat-icon *ngIf="assignment.submittedAt">check</mat-icon>
+      <mat-icon *ngIf="!assignment.submittedAt">close</mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Grade Column -->
+  <ng-container matColumnDef="grade">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>{{
+      "student.grade" | translate
+    }}</mat-header-cell>
+    <mat-cell *matCellDef="let assignment">{{
+      assignment.grade ? assignment.grade : "Not graded yet"
+    }}</mat-cell>
+  </ng-container>
+
+  <!-- Action Column -->
+  <ng-container matColumnDef="action">
+    <mat-header-cell *matHeaderCellDef>{{
+      "label.action" | translate
+    }}</mat-header-cell>
+    <mat-cell *matCellDef="let assignment">
+      <!-- Add button to open dialog to grade assignment -->
+      <button
+        (click)="openGradeDialog(assignment)"
+        *ngIf="assignment.isSubmitted"
+        color="primary"
+        mat-button
+        mat-flat-button
+      >
+        {{ "student.check" | translate }}
+      </button>
+      <button
+        (click)="openGradeDialog(assignment)"
+        *ngIf="!assignment.isSubmitted"
+        color="primary"
+        mat-button
+        mat-flat-button
+      >
+        {{ "student.submit" | translate }}
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+
+<!-- paginator -->
+<mat-paginator
+  [length]="totalAssignments"
+  [pageSizeOptions]="[5, 10, 15]"
+  [pageSize]="assignmentsPerPage"
+  showFirstLastButtons
+></mat-paginator>

@@ -20,14 +20,12 @@
 
     <!-- Liens de Navigation -->
     <mat-nav-list *ngIf="user$ | async as user">
-      <!-- Liens communs à tous les utilisateurs -->
-      <a mat-list-item routerLink="/assignments">
-        <mat-icon>list</mat-icon>
-        {{ "title.listAssignments" | translate }}
-      </a>
-
       <!-- Liens spécifiques pour les professeurs -->
       <ng-container *ngIf="user.role === 'professor'">
+        <a mat-list-item routerLink="/assignments">
+          <mat-icon>list</mat-icon>
+          {{ "title.listAssignments" | translate }}
+        </a>
         <a mat-list-item routerLink="/assignments/add">
           <mat-icon>add</mat-icon>
           {{ "title.addAssignment" | translate }}
@@ -48,9 +46,9 @@
 
       <!-- Liens spécifiques pour les étudiants -->
       <ng-container *ngIf="user.role === 'student'">
-        <a mat-list-item routerLink="/grades">
+        <a mat-list-item routerLink="/assignments/student">
           <mat-icon>grade</mat-icon>
-          {{ "title.myGrades" | translate }}
+          {{ "title.myAssignments" | translate }}
         </a>
       </ng-container>
     </mat-nav-list>

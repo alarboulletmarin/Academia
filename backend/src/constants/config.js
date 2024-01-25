@@ -1,7 +1,9 @@
 import dotenv from "dotenv";
 import { resolve } from "path";
 
-const envPath = resolve(process.cwd(), ".env.local");
+// Load .env or .env.local based on NODE_ENV
+const envFile = process.env.NODE_ENV === "production" ? ".env" : ".env.local";
+const envPath = resolve(process.cwd(), envFile);
 dotenv.config({ path: envPath });
 
 /**
@@ -18,7 +20,9 @@ const config = {
   },
   security: {
     cors: {
-      allowedOrigins: process.env.CORS_ALLOWED_ORIGINS.split(","),
+      allowedOrigins: process.env.CORS_ALLOWED_ORIGINS
+        ? process.env.CORS_ALLOWED_ORIGINS.split(",")
+        : [],
     },
     jwt: {
       secret: process.env.JWT_SECRETKEY,
