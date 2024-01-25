@@ -77,7 +77,8 @@
     "username": "Username",
     "email": "Email",
     "password": "Password",
-    "error": "Login Error"
+    "error": "Login Error",
+    "mandatory": "Mandatory Field"
   },
   "home": {
     "welcome": "Welcome to Academia!",
