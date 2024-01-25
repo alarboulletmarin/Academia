@@ -3,18 +3,22 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Professor } from '../../models/professor.model';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfessorService {
-  private apiUrl = 'http://localhost:1000/api/professors';
+  private apiUrl = `${environment.apiURL}/professors`;
   private readonly headers = new HttpHeaders();
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+  ) {
     this.headers = new HttpHeaders().set(
       'x-auth-token',
-      this.authService.getJwtToken() || ''
+      this.authService.getJwtToken() || '',
     );
   }
 

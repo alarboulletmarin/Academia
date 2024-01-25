@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Group } from '../../models/group.model';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroupService {
-  private apiUrl = 'http://localhost:1000/api/groups';
+  private apiUrl = `${environment.apiURL}/groups`;
   private readonly headers = new HttpHeaders();
 
   constructor(private http: HttpClient, private authService: AuthService) {

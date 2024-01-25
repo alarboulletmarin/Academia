@@ -19,6 +19,7 @@ import { Group } from '../../../../core/models/group.model';
 })
 export class AssignmentDialogComponent implements OnInit {
   public isProfessor: boolean = false;
+  public isStudent: boolean = false;
   public isEditMode: boolean = false;
   public tempAssignment!: Assignment;
   public isGrading: boolean = false;
@@ -42,6 +43,9 @@ export class AssignmentDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.isProfessor = this.authService.hasRole('professor');
+    console.log(this.isProfessor);
+    this.isStudent = this.authService.hasRole('student');
+    console.log(this.isStudent);
     this.isGrading = this.data.isGrading;
     this.tempAssignment = { ...this.data.assignment };
 
@@ -70,6 +74,9 @@ export class AssignmentDialogComponent implements OnInit {
 
   saveChanges() {
     if (this.validateAssignment(this.tempAssignment)) {
+      if (this.tempAssignment.isSubmitted) {
+        this.tempAssignment.submittedAt = new Date();
+      }
       this.tempAssignment.group = this.groups.filter(
         (group) => this.selectedGroups[group._id],
       );

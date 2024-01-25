@@ -13,7 +13,7 @@
           }}</mat-label>
           <input
             [(ngModel)]="tempAssignment.title"
-            [disabled]="!isEditMode || isGrading"
+            [disabled]="!(isEditMode && !isGrading && isProfessor)"
             class="input"
             matInput
             name="title"
@@ -26,7 +26,7 @@
           }}</mat-label>
           <input
             [(ngModel)]="tempAssignment.description"
-            [disabled]="!isEditMode || isGrading"
+            [disabled]="!(isEditMode && !isGrading && isProfessor)"
             class="input"
             matInput
             name="description"
@@ -39,7 +39,7 @@
           }}</mat-label>
           <input
             [(ngModel)]="tempAssignment.dueDate"
-            [disabled]="!isEditMode || isGrading"
+            [disabled]="!(isEditMode && !isGrading && isProfessor)"
             [matDatepicker]="picker"
             class="input"
             matInput
@@ -52,6 +52,16 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
+        <div class="field">
+          <mat-checkbox
+            [(ngModel)]="tempAssignment.isSubmitted"
+            [disabled]="!(isEditMode && isStudent)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            {{ "assignment.isSubmitted" | translate }}
+          </mat-checkbox>
+        </div>
+
         <div class="row">
           <mat-form-field class="field">
             <mat-label class="label">{{
@@ -59,7 +69,7 @@
             }}</mat-label>
             <mat-select
               [(ngModel)]="tempAssignment.professor._id"
-              [disabled]="!isEditMode || isGrading"
+              [disabled]="!(isEditMode && !isGrading && isProfessor)"
               [ngModelOptions]="{ standalone: true }"
               class="input"
             >
@@ -78,7 +88,7 @@
             }}</mat-label>
             <mat-select
               [(ngModel)]="tempAssignment.subject._id"
-              [disabled]="!isEditMode || isGrading"
+              [disabled]="!(isEditMode && !isGrading && isProfessor)"
               [ngModelOptions]="{ standalone: true }"
               class="input"
             >
@@ -95,7 +105,7 @@
         <div *ngFor="let group of groups">
           <mat-checkbox
             [(ngModel)]="selectedGroups[group._id]"
-            [disabled]="!isEditMode || isGrading"
+            [disabled]="!(isEditMode && !isGrading && isProfessor)"
             [ngModelOptions]="{ standalone: true }"
           >
             {{ group.name }}
@@ -106,8 +116,8 @@
       <mat-divider class="divider"></mat-divider>
     </mat-dialog-content>
   </mat-tab>
-  <!--  tab-2  -->
-  <mat-tab label="{{ 'tab.grading' | translate }}">
+  <!--  tab-2 (Professor) -->
+  <mat-tab *ngIf="isProfessor" label="{{ 'tab.grading' | translate }}">
     <mat-dialog-content>
       <form class="form-edit">
         <!-- Show student name -->
@@ -177,7 +187,7 @@
 <mat-dialog-actions class="dialog-actions">
   <button
     (click)="toggleEditMode()"
-    *ngIf="isProfessor && !isEditMode"
+    *ngIf="!isEditMode"
     color="primary"
     mat-raised-button
   >
@@ -185,7 +195,7 @@
   </button>
   <button
     (click)="saveChanges()"
-    *ngIf="isProfessor && isEditMode"
+    *ngIf="isEditMode"
     color="primary"
     mat-raised-button
   >
@@ -193,7 +203,7 @@
   </button>
   <button
     (click)="toggleEditMode()"
-    *ngIf="isProfessor && isEditMode"
+    *ngIf="isEditMode"
     color="accent"
     mat-raised-button
   >

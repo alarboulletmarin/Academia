@@ -23,12 +23,7 @@ router.post(
 );
 router.get("/:id", jwtTokenAuthentication, getAssignment);
 router.get("/", jwtTokenAuthentication, getAssignments);
-router.put(
-  "/:id",
-  jwtTokenAuthentication,
-  requireRole("professor"),
-  updateAssignment,
-);
+router.put("/:id", jwtTokenAuthentication, updateAssignment);
 router.delete(
   "/:id",
   jwtTokenAuthentication,

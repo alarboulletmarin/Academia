@@ -11,6 +11,7 @@ import { ListUsersPageComponent } from './pages/user/list-users-page/list-users-
 import { GenerateAssignmentsPageComponent } from './pages/assignments/generate-assignments-page/generate-assignments-page.component';
 import { CalendarComponent } from './pages/calendar/calendar-page/calendar/calendar.component';
 import { GradeAssignmentPageComponent } from './pages/assignments/grade-assignment-page/grade-assignment-page.component';
+import { StudentAssignmentsPageComponent } from './pages/assignments/student-assignments-page/student-assignments-page.component';
 
 const routes: Routes = [
   // AUTH PAGE
@@ -58,6 +59,14 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [authGuard],
     data: { expectedRoles: ['professor'] },
+  },
+  // STUDENT ASSIGNMENTS PAGE
+  {
+    path: APP_CONSTANTS.routerLinks.studentAssignments,
+    component: StudentAssignmentsPageComponent,
+    pathMatch: 'full',
+    canActivate: [authGuard],
+    data: { expectedRoles: ['student'] },
   },
   // ASSIGNMENT GENERATE PAGE
   {
