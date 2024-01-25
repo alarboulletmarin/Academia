@@ -1,20 +1,24 @@
 <div class="auth-container">
   <mat-card>
-    <mat-card-header>
-      <mat-card-title>{{ "auth.login" | translate }}</mat-card-title>
-    </mat-card-header>
+    <h1>ACADEMIA</h1>
+    <h2>{{ "auth.login" | translate }}</h2>
     <mat-card-content>
       <form (submit)="onSubmit()" [formGroup]="loginForm">
         <!-- email -->
+        <mat-card-header>
+          <mat-card-title class="loginField">{{ "auth.email" | translate }}</mat-card-title>
+        </mat-card-header>
         <mat-form-field appearance="fill">
-          <mat-label>{{ "auth.email" | translate }}</mat-label>
+          <mat-label>{{ "auth.mandatory" | translate }}</mat-label>
           <input formControlName="email" matInput type="email" />
           <mat-icon matSuffix>email</mat-icon>
         </mat-form-field>
-
+        <mat-card-header>
+          <mat-card-title class="loginField">{{ "auth.password" | translate }}</mat-card-title>
+        </mat-card-header>
         <!-- password -->
         <mat-form-field appearance="fill">
-          <mat-label>{{ "auth.password" | translate }}</mat-label>
+          <mat-label>{{ "auth.mandatory" | translate }}</mat-label>
           <input
             [type]="hidePassword ? 'password' : 'text'"
             formControlName="password"

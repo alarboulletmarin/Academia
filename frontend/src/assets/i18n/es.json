@@ -77,7 +77,8 @@
     "username": "Nombre de Usuario",
     "email": "Correo Electrónico",
     "password": "Contraseña",
-    "error": "Error de Inicio de Sesión"
+    "error": "Error de Inicio de Sesión",
+    "mandatory": "Campo Obligatorio"
   },
   "home": {
     "welcome": "¡Bienvenido a Academia!",
