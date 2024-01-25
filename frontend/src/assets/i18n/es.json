@@ -118,5 +118,17 @@
   "tab": {
     "assignments": "Información de la Tarea",
     "grading": "Calificar la Tarea"
+  },
+  "toast": {
+    "success": {
+      "updateAssignment": "¡Tarea actualizada con éxito!",
+      "deleteAssignment": "¡Tarea eliminada con éxito!",
+      "generateAssignments": "¡Tareas generadas con éxito!"
+    },
+    "error": {
+      "updateAssignment": "Error al actualizar la tarea",
+      "deleteAssignment": "Error al eliminar la tarea",
+      "generateAssignments": "Error al generar las tareas"
+    }
   }
 }

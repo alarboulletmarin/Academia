@@ -117,5 +117,17 @@
   "tab": {
     "assignments": "Informazioni sul Compito",
     "grading": "Valutare il Compito"
+  },
+  "toast": {
+    "success": {
+      "updateAssignment": "Compito aggiornato con successo!",
+      "deleteAssignment": "Compito eliminato con successo!",
+      "generateAssignments": "Compiti generati con successo!"
+    },
+    "error": {
+      "updateAssignment": "Errore durante l'aggiornamento del compito",
+      "deleteAssignment": "Errore durante l'eliminazione del compito",
+      "generateAssignments": "Errore durante la generazione dei compiti"
+    }
   }
 }

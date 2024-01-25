@@ -47,3 +47,5 @@ body.dark-theme {
   // Apply only color configuration for the dark theme
   @include mat.all-component-colors($dark-theme);
 }
+
+@import '../node_modules/ngx-toastr/toastr.css';

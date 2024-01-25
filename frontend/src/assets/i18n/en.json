@@ -118,5 +118,17 @@
   "tab": {
     "assignments": "Assignment Information",
     "grading": "Grade the Assignment"
+  },
+  "toast": {
+    "success": {
+      "updateAssignment": "Assignment updated successfully!",
+      "deleteAssignment": "Assignment deleted successfully!",
+      "generateAssignments": "Assignments generated successfully!"
+    },
+    "error": {
+      "updateAssignment": "Error updating the assignment",
+      "deleteAssignment": "Error deleting the assignment",
+      "generateAssignments": "Error generating the assignments"
+    }
   }
 }
