@@ -1,0 +1,138 @@
+{
+  "lang": {
+    "de": "Deutsch",
+    "en": "English",
+    "fr": "Français",
+    "it": "Italiano",
+    "es": "Español"
+  },
+  "label": {
+    "home": "Accueil",
+    "about": "À propos",
+    "action": "Action",
+    "infoAssignment" : "Informations du devoir"
+  },
+  "button":{
+    "back": "Retour",
+    "next": "Suivant",
+    "finish": "Terminer",
+    "generate": "Générer les devoirs",
+    "modify": "Modifier",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "add": "Ajouter",
+    "edit": "Éditer",
+    "close": "Fermer"
+  },
+  "title": {
+    "addAssignment": "Ajouter un devoir",
+    "listAssignments": "Liste des devoirs",
+    "manageUser": "Gérer des utilisateurs",
+    "noter": "Noter un devoir",
+    "testDev": "Données de test (Dev)",
+    "myGrades": "Mes devoirs",
+    "ressources": "Ressources",
+    "myCalendar": "Mon calendrier",
+    "calendar": "Calendrier des devoirs",
+    "settings": "Paramètres",
+    "myAssignments": "Mes devoirs"
+  },
+
+  "assignment":{
+    "type": "Devoir",
+    "title": "Titre",
+    "description": "Description",
+    "dateLimit": "Date limite",
+    "duration": "Durée",
+    "subject": "Matière",
+    "teacher": "Professeur",
+    "dueDate": "Date de remise",
+    "group": "Groupe",
+    "submit" : "Soumis à",
+    "notSubmitYet": "Devoir pas encore soumis",
+    "isSubmitted": "Devoir soumis"
+  },
+
+  "add":{
+    "title": "Titre",
+    "description": "Description",
+    "dateLimit": "Date limite",
+    "duration": "Durée",
+    "subject": "Matière",
+    "teacher": "Professeur",
+    "group": "Groupe",
+    "step1": "Étape 1 : Informations de base",
+    "step2": "Étape 2 : Informations complémentaires",
+    "step3": "Étape 3 : Récapitulatif",
+    "summary": "Récapitulatif"
+  },
+
+  "generate":{
+    "title" : "Selectionner le nombre devoirs",
+    "number" : "Nombre de devoirs"
+  },
+
+  "textInput": {
+    "search": "Rechercher"
+  },
+
+  "auth": {
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "username": "Nom d'utilisateur",
+    "email": "Courrier électronique ",
+    "password": "Mot de passe",
+    "error": "Erreur de connexion",
+    "mandatory": "Champ obligatoire"
+  },
+
+  "home": {
+    "welcome": "Bienvenue sur  Academia !",
+    "description": "Cette application permet de gérer les devoirs des élèves d'une école.",
+    "dailyAssignment": "Devoirs d'aujourd'hui",
+    "noAssignment": "Aucun devoir pour aujourd'hui",
+    "due" : "Dû le",
+    "groups" : "Groupe(s)",
+    "subject" : "Sujet",
+    "details" : "Voir les détails",
+    "allAssignments" : "Voir tous les devoirs"
+  },
+  "user":{
+    "list": "Liste des utilisateurs",
+    "role": "Rôle"
+  },
+  "student": {
+    "type": "Elève",
+    "grade": "Note",
+    "submit": "Soumettre",
+    "check": "Vérifier"
+  },
+  "professor": {
+    "type": "Professeur"
+  },
+  "subject": {
+    "subject": "Sujet"
+  },
+  "notation": {
+    "dateSoumission": "Date de soumission",
+    "remarqueEleve" : "Remarques de l'élève",
+    "remarqueProf" : "Remarques de l'enseignant"
+  },
+  "tab": {
+    "assignments": "Informations du devoir",
+    "grading": "Noter le devoir"
+  },
+  "toast": {
+    "success": {
+      "updateAssignment": "Devoir mis à jour avec succès !",
+      "deleteAssignment": "Devoir supprimé avec succès !",
+      "generateAssignments": "Devoirs générés avec succès !"
+    },
+    "error": {
+      "updateAssignment": "Erreur lors de la mise à jour du devoir",
+      "deleteAssignment": "Erreur lors de la suppression du devoir",
+      "generateAssignments": "Erreur lors de la génération des devoirs"
+    }
+  }
+}
