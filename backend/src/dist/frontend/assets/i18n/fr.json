@@ -125,11 +125,13 @@
   },
   "toast": {
     "success": {
+      "addAssignment": "Devoir ajouté avec succès !",
       "updateAssignment": "Devoir mis à jour avec succès !",
       "deleteAssignment": "Devoir supprimé avec succès !",
       "generateAssignments": "Devoirs générés avec succès !"
     },
     "error": {
+      "addAssignment": "Erreur lors de l'ajout du devoir",
       "updateAssignment": "Erreur lors de la mise à jour du devoir",
       "deleteAssignment": "Erreur lors de la suppression du devoir",
       "generateAssignments": "Erreur lors de la génération des devoirs"

@@ -120,11 +120,13 @@
   },
   "toast": {
     "success": {
+      "addAssignment": "Compito aggiunto con successo!",
       "updateAssignment": "Compito aggiornato con successo!",
       "deleteAssignment": "Compito eliminato con successo!",
       "generateAssignments": "Compiti generati con successo!"
     },
     "error": {
+      "addAssignment": "Errore durante l'aggiunta del compito",
       "updateAssignment": "Errore durante l'aggiornamento del compito",
       "deleteAssignment": "Errore durante l'eliminazione del compito",
       "generateAssignments": "Errore durante la generazione dei compiti"
