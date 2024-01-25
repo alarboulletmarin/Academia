@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
 import { Assignment } from '../../models/assignment.model';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AssignmentService {
-  private apiUrl = '/api/assignments';
+  private apiUrl = `${environment.apiURL}/assignments`;
   private readonly headers = new HttpHeaders();
 
   private assignmentsUpdatedSubject = new Subject<void>();

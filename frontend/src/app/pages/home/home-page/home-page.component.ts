@@ -53,7 +53,21 @@ export class HomePageComponent implements OnInit {
               console.error('Error fetching assignments:', error),
           });
         } else {
-          console.error('User is not a professor.');
+          const studentId = user.profile;
+
+          const params = new HttpParams()
+            .set('dueDate', currentDate.toISOString())
+            .set('student', studentId)
+            .set('paginate', 'false');
+
+          this.assignmentService.getAssignments(params).subscribe({
+            next: ({ assignments, totalResults }) => {
+              this.assignmentsOfTheDay = assignments;
+              this.totalAssignments = totalResults;
+            },
+            error: (error) =>
+              console.error('Error fetching assignments:', error),
+          });
         }
       },
       (error) => {

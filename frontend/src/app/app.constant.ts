@@ -17,6 +17,7 @@ export const APP_CONSTANTS = {
     addAssignment: 'assignments/add',
     listAssignments: 'assignments',
     gradeAssignment: 'assignments/grade',
+    studentAssignments: 'assignments/student',
     generateAssignments: 'assignments/generate',
     auth: 'login',
     users: 'users',

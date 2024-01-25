@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { Subject } from '../../models/subject.model';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SubjectService {
-  private apiUrl = '/api/subjects';
+  private apiUrl = `${environment.apiURL}/subjects`;
   private readonly headers = new HttpHeaders();
 
   constructor(
