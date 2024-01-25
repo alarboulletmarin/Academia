@@ -36,7 +36,8 @@
     "ressources": "Recursos",
     "myCalendar": "Mi Calendario",
     "calendar": "Calendario de Tareas",
-    "settings": "Configuraciones"
+    "settings": "Configuraciones",
+    "myAssignments": "Mis tareas"
   },
   "assignment": {
     "type": "Tarea",
@@ -49,7 +50,8 @@
     "dueDate": "Fecha de Entrega",
     "group": "Grupo",
     "submit" : "Presentado en",
-    "notSubmitYet": "Tarea Aún No Enviada"
+    "notSubmitYet": "Tarea Aún No Enviada",
+    "isSubmitted": "Tarea entregada"
   },
   "add": {
     "title": "Título",
@@ -93,13 +95,20 @@
   },
   "user": {
     "list": "Lista de Usuarios",
-    "role": "Rol"
+    "role": "Rol",
+    "submit": "Enviar",
+    "check": "Verificar"
   },
   "student": {
     "type": "Estudiante",
     "grade": "Calificación"
   },
-
+  "professor": {
+    "type": "Profesor"
+  },
+  "subject": {
+    "subject": "Tema"
+  },
   "notation": {
     "dateSoumission": "Fecha de Envío",
     "remarqueEleve": "Comentarios del Estudiante",

@@ -36,7 +36,8 @@
     "ressources": "Resources",
     "myCalendar": "My Calendar",
     "calendar": "Assignment Calendar",
-    "settings": "Settings"
+    "settings": "Settings",
+    "myAssignments": "My assignments"
   },
   "assignment": {
     "type": "Assignment",
@@ -49,7 +50,8 @@
     "dueDate": "Due Date",
     "group": "Group",
     "submit" : "Submitted at",
-    "notSubmitYet": "Assignment Not Yet Submitted"
+    "notSubmitYet": "Assignment Not Yet Submitted",
+    "isSubmitted": "Assignment submitted"
   },
   "add": {
     "title": "Title",
@@ -97,9 +99,16 @@
   },
   "student": {
     "type": "Student",
-    "grade": "Grade"
+    "grade": "Grade",
+    "submit": "Submit",
+    "check": "Check"
   },
-
+  "professor": {
+    "type": "Professor"
+  },
+  "subject": {
+    "subject": "Subject"
+  },
   "notation": {
     "dateSoumission": "Submission Date",
     "remarqueEleve": "Student's Remarks",
