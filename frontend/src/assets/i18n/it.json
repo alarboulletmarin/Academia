@@ -32,7 +32,7 @@
     "manageUser": "Gestisci Utenti",
     "noter": "Valuta un Compito",
     "testDev": "Dati di Test (Dev)",
-    "myGrades": "Le Mie Note",
+    "myGrades": "I Miei Compiti",
     "ressources": "Risorse",
     "myCalendar": "Il Mio Calendario",
     "calendar": "Calendario dei Compiti",
@@ -77,8 +77,7 @@
     "username": "Nome Utente",
     "email": "Email",
     "password": "Password",
-    "error": "Errore di Accesso",
-    "mandatory": "Questo campo è obbligatorio"
+    "error": "Errore di Accesso"
   },
   "home": {
     "welcome": "Benvenuto in Academia!",
