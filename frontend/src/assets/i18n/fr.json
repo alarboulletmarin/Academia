@@ -122,5 +122,17 @@
   "tab": {
     "assignments": "Informations du devoir",
     "grading": "Noter le devoir"
+  },
+  "toast": {
+    "success": {
+      "updateAssignment": "Devoir mis à jour avec succès !",
+      "deleteAssignment": "Devoir supprimé avec succès !",
+      "generateAssignments": "Devoirs générés avec succès !"
+    },
+    "error": {
+      "updateAssignment": "Erreur lors de la mise à jour du devoir",
+      "deleteAssignment": "Erreur lors de la suppression du devoir",
+      "generateAssignments": "Erreur lors de la génération des devoirs"
+    }
   }
 }

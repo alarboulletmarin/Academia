@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, Subject, tap } from 'rxjs';
+import { catchError, Observable, Subject, tap } from 'rxjs';
 import { Assignment } from '../../models/assignment.model';
 import { AuthService } from '../auth/auth.service';
 import { environment } from '../../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +21,8 @@ export class AssignmentService {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
+    private toastr: ToastrService,
+    private translate: TranslateService,
   ) {
     this.headers = new HttpHeaders().set(
       'x-auth-token',
@@ -39,6 +43,15 @@ export class AssignmentService {
       .pipe(
         tap(() => {
           this.assignmentsUpdatedSubject.next();
+          this.toastr.success(
+            this.translate.instant('toast.success.addAssignment'),
+          );
+        }),
+        catchError((error) => {
+          this.toastr.error(
+            this.translate.instant('toast.error.addAssignment'),
+          );
+          throw error;
         }),
       );
   }
@@ -51,6 +64,15 @@ export class AssignmentService {
       .pipe(
         tap(() => {
           this.assignmentsUpdatedSubject.next();
+          this.toastr.success(
+            this.translate.instant('toast.success.updateAssignment'),
+          );
+        }),
+        catchError((error) => {
+          this.toastr.error(
+            this.translate.instant('toast.error.updateAssignment'),
+          );
+          throw error;
         }),
       );
   }
@@ -61,6 +83,15 @@ export class AssignmentService {
       .pipe(
         tap(() => {
           this.assignmentsUpdatedSubject.next();
+          this.toastr.success(
+            this.translate.instant('toast.success.deleteAssignment'),
+          );
+        }),
+        catchError((error) => {
+          this.toastr.error(
+            this.translate.instant('toast.error.deleteAssignment'),
+          );
+          throw error;
         }),
       );
   }
@@ -75,15 +106,16 @@ export class AssignmentService {
       .pipe(
         tap(() => {
           this.assignmentsUpdatedSubject.next();
+          this.toastr.success(
+            this.translate.instant('toast.success.generateAssignments'),
+          );
+        }),
+        catchError((error) => {
+          this.toastr.error(
+            this.translate.instant('toast.error.generateAssignments'),
+          );
+          throw error;
         }),
       );
-  }
-
-  getAssignmentsForProfessor(professorId: string): Observable<any> {
-    const params = new HttpParams().set('professor', professorId);
-    return this.http.get<any>(this.apiUrl, {
-      headers: this.headers,
-      params: params,
-    });
   }
 }

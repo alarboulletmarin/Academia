@@ -118,5 +118,17 @@
   "tab": {
     "assignments": "Informationen zur Aufgabe",
     "grading": "Die Aufgabe bewerten"
+  },
+  "toast": {
+    "success": {
+      "updateAssignment": "Aufgabe erfolgreich aktualisiert!",
+      "deleteAssignment": "Aufgabe erfolgreich gelöscht!",
+      "generateAssignments": "Aufgaben erfolgreich generiert!"
+    },
+    "error": {
+      "updateAssignment": "Fehler bei der Aktualisierung der Aufgabe",
+      "deleteAssignment": "Fehler beim Löschen der Aufgabe",
+      "generateAssignments": "Fehler bei der Generierung der Aufgaben"
+    }
   }
 }

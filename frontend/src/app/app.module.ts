@@ -25,6 +25,7 @@ import { GenerateAssignmentsPageComponent } from './pages/assignments/generate-a
 import { CalendarComponent } from './pages/calendar/calendar-page/calendar/calendar.component';
 import { GradeAssignmentPageComponent } from './pages/assignments/grade-assignment-page/grade-assignment-page.component';
 import { StudentAssignmentsPageComponent } from './pages/assignments/student-assignments-page/student-assignments-page.component';
+import { ToastrModule } from 'ngx-toastr';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -55,6 +56,10 @@ const COMPONENTS = [
     SharedModule,
     CoreModule,
     LayoutModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
