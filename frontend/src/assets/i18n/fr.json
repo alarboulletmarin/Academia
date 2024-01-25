@@ -81,7 +81,8 @@
     "username": "Nom d'utilisateur",
     "email": "Courrier électronique ",
     "password": "Mot de passe",
-    "error": "Erreur de connexion"
+    "error": "Erreur de connexion",
+    "mandatory": "Champ obligatoire"
   },
 
   "home": {
