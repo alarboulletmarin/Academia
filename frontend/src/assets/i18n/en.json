@@ -121,11 +121,13 @@
   },
   "toast": {
     "success": {
+      "addAssignment": "Assignment added successfully!",
       "updateAssignment": "Assignment updated successfully!",
       "deleteAssignment": "Assignment deleted successfully!",
       "generateAssignments": "Assignments generated successfully!"
     },
     "error": {
+      "addAssignment": "Error adding the assignment",
       "updateAssignment": "Error updating the assignment",
       "deleteAssignment": "Error deleting the assignment",
       "generateAssignments": "Error generating the assignments"

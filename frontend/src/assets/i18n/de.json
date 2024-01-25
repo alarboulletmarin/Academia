@@ -121,11 +121,13 @@
   },
   "toast": {
     "success": {
+      "addAssignment": "Aufgabe erfolgreich hinzugefügt!",
       "updateAssignment": "Aufgabe erfolgreich aktualisiert!",
       "deleteAssignment": "Aufgabe erfolgreich gelöscht!",
       "generateAssignments": "Aufgaben erfolgreich generiert!"
     },
     "error": {
+      "addAssignment": "Fehler beim Hinzufügen der Aufgabe",
       "updateAssignment": "Fehler bei der Aktualisierung der Aufgabe",
       "deleteAssignment": "Fehler beim Löschen der Aufgabe",
       "generateAssignments": "Fehler bei der Generierung der Aufgaben"
