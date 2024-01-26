@@ -17,7 +17,6 @@ Table des matières
 - [Exécution](#exécution)
 - [Fonctionnalités](#fonctionnalités)
 - [Contribution](#contribution)
-- [Dépannage](#dépannage)
 - [Informations de Connexion](#informations-de-connexion)
 
 ## 🛠 Technologies utilisées
@@ -89,7 +88,7 @@ Table des matières
 - 🗓️ **Consulter les devoirs du jour** : Affiche une liste des devoirs planifiés pour le jour en cours.
 - 🔧 **Filtrer et trier la liste de devoirs** : Permet de trier et de filtrer les devoirs selon différents critères à partir de la liste de devoirs.
 
-[//]: # (GIF PROFS)
+![feat_prof.gif](assets/feat_prof.gif)
 
 ### En tant qu'élève :
 
@@ -99,7 +98,7 @@ Table des matières
 - 🔧 **Trier la liste de mes devoirs** : Permet de trier la liste de mes devoirs selon différents critères.
 - 📅 **Consulter mon calendrier de devoirs** : Affiche un aperçu de mes devoirs organisés par date.
 
-[//]: # (GIF ELEVES)
+![feat_student.gif](assets/feat_student.gif)
 
 ### Informations de Connexion
 
