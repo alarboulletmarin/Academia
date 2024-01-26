@@ -2,7 +2,10 @@
   <div class="welcome-section">
     <h1>{{ "home.welcome" | translate }}</h1>
     <p>{{ "home.description" | translate }}</p>
-    <h2>{{ "home.dailyAssignment" |translate }} : {{ assignmentsOfTheDay.length }}</h2>
+    <h2>
+      {{ "home.dailyAssignment" | translate }} :
+      {{ assignmentsOfTheDay.length }}
+    </h2>
 
     <div class="assignments-grid">
       <mat-card
@@ -11,11 +14,12 @@
       >
         <mat-card-title>{{ assignment.title }}</mat-card-title>
         <mat-card-subtitle
-          >{{"home.due" | translate}} {{ assignment.dueDate | date: "short" }}</mat-card-subtitle
+          >{{ "home.due" | translate }}
+          {{ assignment.dueDate | date: "short" }}</mat-card-subtitle
         >
         <mat-card-content>
           <p>{{ assignment.description }}</p>
-          <p>{{"home.subject" | translate}}: {{ assignment.subject.name }}</p>
+          <p>{{ "home.subject" | translate }}: {{ assignment.subject.name }}</p>
           <p>
             {{ "home.groups" | translate }} :
             <span *ngFor="let group of assignment.group; let isLast = last">
@@ -30,7 +34,20 @@
         </mat-card-actions>
       </mat-card>
     </div>
-    <button [routerLink]="['/assignments']" color="primary" mat-raised-button>
+    <button
+      *ngIf="isProfessor"
+      [routerLink]="['/assignments']"
+      color="primary"
+      mat-raised-button
+    >
+      {{ "home.allAssignments" | translate }}
+    </button>
+    <button
+      *ngIf="isStudent"
+      [routerLink]="['/assignments/student']"
+      color="primary"
+      mat-raised-button
+    >
       {{ "home.allAssignments" | translate }}
     </button>
   </div>

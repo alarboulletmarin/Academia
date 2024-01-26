@@ -11,7 +11,7 @@ COPY . .
 RUN npm install
 
 # Exposition du port sur lequel l'application s'exécute
-EXPOSE 1000
+EXPOSE 10000
 
 # Définition de la variable d'environnement NODE_ENV
 ENV NODE_ENV=development

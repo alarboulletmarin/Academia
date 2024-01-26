@@ -13,6 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
+  public isProfessor: boolean = false;
+  public isStudent: boolean = false;
   protected assignmentsOfTheDay: Assignment[] = [];
   private allAssignments: Assignment[] = [];
   private totalAssignments!: number;
@@ -38,6 +40,7 @@ export class HomePageComponent implements OnInit {
       (user) => {
         if (user.onModel === 'Professor') {
           const professorId = user.profile;
+          this.isProfessor = true;
 
           const params = new HttpParams()
             .set('dueDate', currentDate.toISOString())
@@ -54,6 +57,7 @@ export class HomePageComponent implements OnInit {
           });
         } else {
           const studentId = user.profile;
+          this.isStudent = true;
 
           const params = new HttpParams()
             .set('dueDate', currentDate.toISOString())

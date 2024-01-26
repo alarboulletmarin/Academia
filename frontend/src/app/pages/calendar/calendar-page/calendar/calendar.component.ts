@@ -70,7 +70,34 @@ export class CalendarComponent {
               console.error('Error fetching all assignments:', error),
           });
         } else {
-          console.error('User is not a professor.');
+          const studentId = user.profile;
+
+          const params = new HttpParams()
+            .set('student', studentId)
+            .set('start', start.toISOString())
+            .set('end', end.toISOString())
+            .set('paginate', 'false');
+
+          this.assignmentService.getAssignments(params).subscribe({
+            next: ({ assignments, totalResults }) => {
+              this.allAssignments = assignments;
+              this.totalAssignments = totalResults;
+
+              this.calendarOptions.events = this.allAssignments.map(
+                (assignment) => {
+                  let dueDateObj = new Date(assignment.dueDate);
+                  let dueDateISO = dueDateObj.toISOString();
+
+                  return {
+                    title: assignment.title,
+                    start: dueDateISO,
+                  };
+                },
+              );
+            },
+            error: (error) =>
+              console.error('Error fetching all assignments:', error),
+          });
         }
       },
       (error) => {
