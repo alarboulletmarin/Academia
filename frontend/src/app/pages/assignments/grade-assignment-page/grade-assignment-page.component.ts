@@ -98,7 +98,7 @@ export class GradeAssignmentPageComponent implements OnInit, AfterViewInit {
   public openGradeDialog(assignment: Assignment): void {
     const dialogRef = this.dialog.open(AssignmentDialogComponent, {
       width: '800px',
-      height: '800px',
+      height: '850px',
       data: {
         assignment: assignment,
         isGrading: true,

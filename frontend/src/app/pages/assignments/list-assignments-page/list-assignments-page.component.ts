@@ -119,7 +119,7 @@ export class ListAssignmentsPageComponent implements OnInit, AfterViewInit {
   public openAssignmentDialog(assignment: Assignment): void {
     const dialogRef = this.dialog.open(AssignmentDialogComponent, {
       width: '800px',
-      height: '800px',
+      height: '850px',
       data: {
         assignment: assignment,
         isGrading: false,
