@@ -1,5 +1,9 @@
 <h1 style="text-align: center;">📚 Academia</h1>
 
+## Étudiants
+- Larboullet-Marin Andréa
+- Ripoll Théo
+
 <p style="text-align: center;">
     Bienvenue à Academia - une application développée pour aider les utilisateurs à gérer, suivre et organiser leurs devoirs.
 </p>
