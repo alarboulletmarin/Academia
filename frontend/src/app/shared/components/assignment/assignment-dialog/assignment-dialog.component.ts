@@ -43,9 +43,7 @@ export class AssignmentDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.isProfessor = this.authService.hasRole('professor');
-    console.log(this.isProfessor);
     this.isStudent = this.authService.hasRole('student');
-    console.log(this.isStudent);
     this.isGrading = this.data.isGrading;
     this.tempAssignment = { ...this.data.assignment };
 

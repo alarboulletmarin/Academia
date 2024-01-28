@@ -70,8 +70,8 @@ export class AuthService {
           this.redirectToLogin();
         }
       },
-      5 * 60 * 1000,
-    ); // 5 minutes
+      1000 * 60 * 60 * 24,
+    ); // 24h
   }
 
   public removeJwtToken() {
